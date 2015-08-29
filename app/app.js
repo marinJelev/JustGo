@@ -16,6 +16,11 @@ routie('login', function() {
   $('#main-content').load('app/views/loginView.html');
 });
 
+routie('register', function() {
+    console.log('Im in registration');
+    $('#main-content').load('app/views/registrationView.html');
+});
+
 routie('', function() {
   console.log('Home View');
 });

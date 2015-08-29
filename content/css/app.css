@@ -1,0 +1,53 @@
+html, body {
+    padding: 0;
+    margin: 0;
+}
+
+#map {
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: #000;
+    position: absolute !important;
+}
+
+#coords {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    z-index: 100000;
+}
+
+#buttons {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}
+
+#layercontrol {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.we-pp-wrapper{
+    border-radius: 0px;
+    color: darkslategrey;
+}
+
+.navbar{
+    z-index: 10;
+}
+
+.container{
+    position: absolute;
+}
+
+.footer{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 60px;
+    background-color: #375a7f;
+}

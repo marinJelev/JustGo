@@ -7,7 +7,8 @@
     map: {
       babel: '../node_modules/babel-core/browser.js',
       jquery: '../bower_components/jquery/dist/jquery.js',
-      jqueryRoutes: '../bower_components/jquery-routes/jquery.routes.js'
+      jqueryRoutes: '../bower_components/jquery-routes/jquery.routes.js',
+      routie: '../bower_components/routie/dist/routie.js'
     }
   });
 }());

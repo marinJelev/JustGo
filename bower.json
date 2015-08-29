@@ -16,7 +16,7 @@
   "dependencies": {
     "bootstrap": "~3.3.5",
     "jquery": "~1.11",
-    "jquery-routes": "*",
-    "system.js": "~0.18.17"
+    "system.js": "~0.18.17",
+    "routie": "https://github.com/jgallen23/routie.git#~0.3.2"
   }
 }

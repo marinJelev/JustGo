@@ -3,6 +3,9 @@
     <form class="form-horizontal" id="login-form">
       <fieldset>
         <legend>Login</legend>
+        <div class="alert alert-dismissible alert-danger">
+          <strong>Oh snap!</strong>Username and password should be at least 4 symbols long.
+        </div>
         <div class="form-group">
           <label for="input-username" class="col-md-2 control-label">Username</label>
           <div class="col-md-10">
@@ -12,12 +15,12 @@
         <div class="form-group">
           <label for="input-password" class="col-md-2 control-label">Password</label>
           <div class="col-md-10">
-            <input type="text" class="form-control" id="input-password" placeholder="Password">
+            <input type="text" class="form-control has-error" id="input-password" placeholder="Password">
           </div>
         </div>
         <div class="form-group">
           <div class="col-md-10 col-md-offset-2">
-            <input type="button" class="btn btn-danger" id="button-cancel" value="Cancel">
+            <input type="reset" class="btn btn-danger" id="button-reset" value="Reset">
             <input type="button" class="btn btn-success" id="button-login" value="Login">
           </div>
         </div>

@@ -14,7 +14,9 @@
     "tests"
   ],
   "dependencies": {
-    "jquery": "~1.11"
-
+    "bootstrap": "~3.3.5",
+    "jquery": "~1.11",
+    "jquery-routes": "*",
+    "system.js": "~0.18.17"
   }
 }

@@ -1,4 +1,7 @@
-(function () {
+
+
+
+// (function () {
     var marker;
     var spinning = false;
 
@@ -73,4 +76,4 @@
     }
 
 
-}());
+// }());

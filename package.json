@@ -13,5 +13,8 @@
     "postinstall": "bower install",
     "prestart": "npm install",
     "start": "http-server "
+  },
+  "dependencies": {
+    "babel-core": "^5.8.23"
   }
 }

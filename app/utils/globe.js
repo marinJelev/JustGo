@@ -1,4 +1,4 @@
-var globe = (function () {
+// var globe = (function () {
     var map;
     var isSpinning = false;
     var before = null;
@@ -56,9 +56,9 @@ var globe = (function () {
         }
     }
 
-    return {
-        spin: spin,
-        panTo: panTo,
-        map: map
-    }
-})();
+    export default {
+        spin,
+        panTo,
+        map
+    };
+// })();

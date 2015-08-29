@@ -1,18 +1,18 @@
-var geoLocationOfCityService = (function ($) {
-    var url = "http://maps.googleapis.com/maps/api/geocode/json?latlng=";
+// var geoLocationOfCityService = (function ($) {
+var url = "http://maps.googleapis.com/maps/api/geocode/json?latlng=";
 
-    function getCityByGeoLocation(lat, lang, succes) {
-        var currentUrl = url + lat + ',' + lang + '&sensor=true';
-        $.get(currentUrl, succes)
-    }
+function getCityByGeoLocation(lat, lang, succes) {
+    var currentUrl = url + lat + ',' + lang + '&sensor=true';
+    $.get(currentUrl, succes);
+}
 
-    function getAllCountry(succes) {
-        var url = 'app/data/country.json';
-        $.get(url, succes);
-    }
+function getAllCountry(succes) {
+    var url = 'app/data/country.json';
+    $.get(url, succes);
+}
 
-    return {
-        getCityByGeoLocation: getCityByGeoLocation,
-        getAllCountry: getAllCountry
-    }
-}(jQuery));
+export {
+    getCityByGeoLocation,
+    getAllCountry
+};
+// }(jQuery));

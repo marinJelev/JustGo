@@ -1,16 +1,27 @@
 import $ from 'jquery';
-import routes from 'jqueryRoutes';
+import routie from 'routie';
+
 // import globe from 'utils/globe.js';
 // import service from 'services/getGeoLocationOfCityService.js';
+console.log(routie);
 
-$.routes.add('/home', function() {
-  console.log('Home View');
-});
 
-$.routes.add('/globe', function() {
+
+routie('globe', function() {
+  console.log('Im in globe');
   $('#main-content').load('app/views/globeView.html');
 });
 
-$.routes.add('/login', function() {
+routie('login', function() {
+  console.log('Im in login');
   $('#main-content').load('app/views/loginView.html');
 });
+
+routie('', function() {
+  console.log('Home View');
+});
+
+routie('*', function() {
+console.log('ne');
+});
+

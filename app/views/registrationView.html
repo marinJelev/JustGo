@@ -1,10 +1,26 @@
-<form class="form-horizontal">
+<form class="form-horizontal" id="registration-form">
     <fieldset>
-        <legend>Registraton</legend>
+        <legend>Registration</legend>
+
+        <div class="alert alert-dismissible alert-danger" id="username-error">
+            <button type="button" class="close" data-dismiss="alert">×</button>
+            <strong>Invalid Username!</strong> Username must be 4 characters or more.
+        </div>
+
+        <div class="alert alert-dismissible alert-danger" id="email-error">
+            <button type="button" class="close" data-dismiss="alert">×</button>
+            <strong>Invalid Email!</strong>
+        </div>
+
+        <div class="alert alert-dismissible alert-danger" id="password-error">
+            <button type="button" class="close" data-dismiss="alert">×</button>
+            <strong>Invalid Password!</strong> Password must be 4 characters or more.
+        </div>
+
         <div class="form-group">
-            <label for="input-username" class="col-md-2 control-label">Username</label>
+            <label for="inputUsername" class="col-md-2 control-label">Username</label>
             <div class="col-md-10">
-                <input type="text" class="form-control" id="input-username" placeholder="Username">
+                <input type="text" class="form-control" id="inputUsername" placeholder="Username">
             </div>
         </div>
 
@@ -16,15 +32,25 @@
         </div>
 
         <div class="form-group">
-            <label for="inputPassword" class="col-md-2 control-label">Password</label>
+            <label for="inputPassword" class="col-md-2 control-label">Password: </label>
             <div class="col-md-10">
                 <input type="password" class="form-control" id="inputPassword" placeholder="Password">
             </div>
         </div>
+
+        <div class="form-group">
+            <label for="inputPassword" class="col-md-2 control-label">Retype Password: </label>
+            <div class="col-md-10">
+                <input type="password" class="form-control" id="retypePassword" placeholder="Retype Password">
+            </div>
+        </div>
+
         <div class="form-group">
             <div class="col-lg-10 col-lg-offset-2">
-                <button type="reset" class="btn btn-default">Reset</button>
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <div id="registration-buttons">
+                    <input type="reset" class="btn btn-primary" id="reset-button">
+                    <input type="submit" class="btn btn-primary btn-success" id="submit-button">
+                </div>
             </div>
         </div>
     </fieldset>

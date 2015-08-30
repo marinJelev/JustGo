@@ -1,14 +1,19 @@
 import $ from 'jquery';
 //import globe from 'utils/globe.js';
 //import service from 'services/getGeoLocationOfCityService.js';
+
 import routie from 'routie';
 import loginController from 'loginController';
 import registrationController from 'registrationController';
+import tripsController from 'tripsController';
+import homePageController from 'homePageController';
+import globeController from 'globeController'
 
 
 routie('globe', function() {
     console.log('Im in globe');
-    $('#main-content').load('app/views/globeView.html');
+    $('#main-content').load('app/views/globeView.html', globeController.init);
+   // $('.container').css('position', 'relative');
 });
 
 routie('login', function() {
@@ -23,9 +28,13 @@ routie('register', function() {
 
 routie('home', function() {
     console.log('In home page');
-    $('#main-content').load('app/views/homePageView.html');
+    $('#main-content').load('app/views/homePageView.html', homePageController.init);
 });
 
-routie('*', function() {
-    console.log('ne');
+//routie('*', function() {
+//    console.log('ne');
+//});
+
+routie('*', function () {
+    tripsController.init();
 });

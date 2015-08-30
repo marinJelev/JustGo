@@ -25,12 +25,22 @@ html, body {
     left: 10px;
 }
 
+#jumbotron {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+#home-page {
+    margin-left: 150px;
+}
 #registration-buttons {
     margin-left: 40%;
 }
 
 #registration-form {
     margin-top: 5%;
+    display: block;
+    margin-left: 130px;
 }
 
 #reset-button, #submit-button {
@@ -59,14 +69,24 @@ html, body {
     width: 100px;
 }
 
-.container{
+#globe-buttons{
     position: absolute;
+    margin-left: 17%;
 }
 
 .footer{
     position: absolute;
     bottom: 0;
-    width: 100%;
-    height: 60px;
-    background-color: #375a7f;
+    height: 50px;
+    background-color: #00adee;
+    width: 80%;
+    display: block;
+    margin-left: 130px;
+}
+
+nav {
+    width: 80%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }

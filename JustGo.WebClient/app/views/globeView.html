@@ -1,8 +1,14 @@
 <div id="map"></div>
-<div class="container">
-<div id="buttons">
-    <a href="#" id="fly" class="btn btn-primary" onclick="globe.panTo([65, -19]);">Fly to City</a>
-    <a href="#" id="random" class="btn btn-primary">Random Country</a>
-    <a href="#" id="spin" class="btn btn-primary">Spin</a>
-</div>
+<div id="globe-buttons">
+    <div class="row">
+        <div class="col-lg-4">
+            <input id="fly" class="btn btn-success " onclick="globe.panTo([65, -19]);" value="Fly to City"/>
+        </div>
+        <div class="col-lg-4">
+            <input id="random" class="btn btn-success" value="Random Country"/>
+        </div>
+        <div class="col-lg-4">
+            <input id="spin" class="btn btn-success " value="Spin"/>
+        </div>
+    </div>
 </div>

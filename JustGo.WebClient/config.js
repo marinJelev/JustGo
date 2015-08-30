@@ -1,7 +1,4 @@
-(function() {
-  'use strict';
-
-  System.config({
+System.config({
     baseURL: '/app',
     transpiler: 'babel',
     map: {
@@ -11,7 +8,9 @@
       routie: '../bower_components/routie/dist/routie.js',
       loginController:'./controllers/loginController.js',
       registrationController: './controllers/registrationController.js',
-
+      tripsController: './controllers/tripsController.js',
+      homePageController: './controllers/homePageController.js',
+      globeController: './controllers/globeController.js'
     }
-  });
-}());
+});
+

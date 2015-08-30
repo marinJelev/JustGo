@@ -1,7 +1,6 @@
 import $ from 'jquery';
 
 $('#main-content').load('/app/views/loginView.html', function () {
-    $('.alert').hide();
     $('#button-reset').click(function () {
         $('#login-form').trigger('reset');
     });

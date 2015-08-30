@@ -10,12 +10,14 @@ routie('globe', function() {
 
 routie('login', function() {
     console.log('Im in login');
-    $('#main-content').load('app/views/loginView.html');
+    $('#main-content').load('app/views/loginView.html', function () {
+        $('.alert').hide();
+    });
+
 });
 
 routie('register', function() {
     console.log('Im in registration');
-    $('#main-content').load('app/views/registrationView.html');
 
     $('#main-content').load('app/views/registrationView.html', function () {
         $('.alert').hide();

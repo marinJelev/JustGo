@@ -1,5 +1,3 @@
-import $ from 'jquery';
-
 function init() {
     $('.alert').hide();
     $('#button-reset').click(function () {

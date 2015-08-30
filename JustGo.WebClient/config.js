@@ -12,4 +12,4 @@
       tripsController: './controllers/tripsController.js'
     }
   });
-}());
+

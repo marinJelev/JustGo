@@ -2,6 +2,7 @@ import $ from 'jquery';
 //import globe from 'utils/globe.js';
 //import service from 'services/getGeoLocationOfCityService.js';
 import routie from 'routie';
+import loginController from 'loginController';
 
 routie('globe', function() {
     console.log('Im in globe');
@@ -10,9 +11,7 @@ routie('globe', function() {
 
 routie('login', function() {
     console.log('Im in login');
-    $('#main-content').load('app/views/loginView.html', function () {
-        $('.alert').hide();
-    });
+    $('#main-content').load('app/views/loginView.html', loginController.init);
 
 });
 

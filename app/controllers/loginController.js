@@ -1,6 +1,7 @@
 import $ from 'jquery';
 
-$('#main-content').load('/app/views/loginView.html', function () {
+function init() {
+    $('.alert').hide();
     $('#button-reset').click(function () {
         $('#login-form').trigger('reset');
     });
@@ -20,7 +21,8 @@ $('#main-content').load('/app/views/loginView.html', function () {
             setTimeout(toggleErrorMessage, 2000);
         }
     });
-});
+
+}
 
 function userLoginIsValid(userLoginInformation) {
     return userLoginInformation && userLoginInformation.length > 4;
@@ -29,3 +31,5 @@ function userLoginIsValid(userLoginInformation) {
 function toggleErrorMessage() {
     $('.alert').toggle('slow');
 }
+
+export default {init};

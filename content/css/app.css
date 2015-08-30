@@ -29,6 +29,14 @@ html, body {
     margin-left: 40%;
 }
 
+#registration-form {
+    margin-top: 5%;
+}
+
+#reset-button, #submit-button {
+    margin: 5px;
+}
+
 #layercontrol {
     position: absolute;
     top: 10px;

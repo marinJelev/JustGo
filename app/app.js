@@ -3,6 +3,7 @@ import $ from 'jquery';
 //import service from 'services/getGeoLocationOfCityService.js';
 import routie from 'routie';
 import loginController from 'loginController';
+import registrationController from 'registrationController';
 
 routie('globe', function() {
     console.log('Im in globe');
@@ -12,15 +13,11 @@ routie('globe', function() {
 routie('login', function() {
     console.log('Im in login');
     $('#main-content').load('app/views/loginView.html', loginController.init);
-
 });
 
 routie('register', function() {
     console.log('Im in registration');
-    $('#main-content').load('app/views/registrationView.html', function () {
-        $('.alert').hide();
-    });
-
+    $('#main-content').load('app/views/registrationView.html', registrationController.init);
 });
 
 routie('home', function() {

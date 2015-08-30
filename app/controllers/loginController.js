@@ -19,7 +19,6 @@ function init() {
             setTimeout(toggleErrorMessage, 2000);
         }
     });
-
 }
 
 function userLoginIsValid(userLoginInformation) {

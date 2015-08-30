@@ -1,12 +1,8 @@
-import $ from 'jquery';
-
-$('#main-content').load('app/views/registrationView.html', function () {
+function init() {
     $('.alert').hide();
-
     $('#reset-button').on('click', function () {
         $('.form-horizontal').trigger('reset');
     });
-
     $('#submit-button').on('click', function () {
         var currentUserInformation = {},
             username = $('#inputUsername').val(),
@@ -20,17 +16,17 @@ $('#main-content').load('app/views/registrationView.html', function () {
             console.log(currentUserInformation);
 
         }
-        else if(!userLoginIsValid(username)){
+        else if (!userLoginIsValid(username)) {
             showUsernameErrorMessage();
         }
-        else if(!userLoginIsValid(email)){
+        else if (!userLoginIsValid(email)) {
             showEmailErrorMessage();
         }
-        else if(!userLoginIsValid(password)){
+        else if (!userLoginIsValid(password)) {
             showPasswordErrorMessage();
         }
     });
-});
+}
 
 function userLoginIsValid(userLoginInformation) {
     if (!userLoginInformation || userLoginInformation.length < 4) {
@@ -50,3 +46,5 @@ function showEmailErrorMessage() {
 function showPasswordErrorMessage() {
     $('#password-error').show().delay(1500).fadeOut('slow');
 }
+
+export default {init};

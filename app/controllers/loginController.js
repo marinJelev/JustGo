@@ -17,18 +17,16 @@ $('#main-content').load('/app/views/loginView.html', function () {
             console.log(currentUserInformation);
 
         } else {
-            showErrorMessage();
+            toggleErrorMessage();
+            setTimeout(toggleErrorMessage, 2000);
         }
     });
 });
 
 function userLoginIsValid(userLoginInformation) {
-    if (!userLoginInformation || userLoginInformation.length < 4) {
-        return false;
-    }
-    return true;
+    return userLoginInformation && userLoginInformation.length > 4;
 }
 
-function showErrorMessage() {
-    $('.alert').show().delay(1500).fadeOut('slow');
+function toggleErrorMessage() {
+    $('.alert').toggle('slow');
 }

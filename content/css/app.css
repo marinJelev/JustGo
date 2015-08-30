@@ -25,6 +25,10 @@ html, body {
     left: 10px;
 }
 
+#registration-buttons {
+    margin-left: 40%;
+}
+
 #layercontrol {
     position: absolute;
     top: 10px;

@@ -25,6 +25,14 @@ html, body {
     left: 10px;
 }
 
+#jumbotron {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+#home-page {
+    margin-left: 150px;
+}
 #registration-buttons {
     margin-left: 40%;
 }

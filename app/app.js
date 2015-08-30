@@ -15,16 +15,15 @@ routie('login', function() {
 
 routie('register', function() {
     console.log('Im in registration');
-    $('#main-content').load('app/views/registrationView.html');
-
     $('#main-content').load('app/views/registrationView.html', function () {
         $('.alert').hide();
     });
 
 });
 
-routie('', function() {
-    console.log('Home View');
+routie('home', function() {
+    console.log('In home page');
+    $('#main-content').load('app/views/homePageView.html');
 });
 
 routie('*', function() {

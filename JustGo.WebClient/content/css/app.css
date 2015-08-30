@@ -67,8 +67,9 @@ html, body {
     width: 100px;
 }
 
-.container{
+#globe-buttons{
     position: absolute;
+    margin-left: 17%;
 }
 
 .footer{

@@ -5,10 +5,12 @@ import routie from 'routie';
 import loginController from 'loginController';
 import registrationController from 'registrationController';
 import tripsController from 'tripsController';
+import globeController from 'globeController'
 
 routie('globe', function() {
     console.log('Im in globe');
-    $('#main-content').load('app/views/globeView.html');
+    $('#main-content').load('app/views/globeView.html', globeController.init);
+   // $('.container').css('position', 'relative');
 });
 
 routie('login', function() {

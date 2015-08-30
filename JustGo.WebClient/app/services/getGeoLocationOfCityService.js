@@ -11,7 +11,7 @@ function getAllCountry(succes) {
     $.get(url, succes);
 }
 
-export {
+export default {
     getCityByGeoLocation,
     getAllCountry
 };

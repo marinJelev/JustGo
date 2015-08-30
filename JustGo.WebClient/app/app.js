@@ -28,3 +28,7 @@ routie('home', function() {
 routie('*', function() {
     console.log('ne');
 });
+
+routie('', function () {
+    tripsController.init();
+});

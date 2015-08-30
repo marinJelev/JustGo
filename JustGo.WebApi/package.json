@@ -1,0 +1,22 @@
+{
+  "name": "just-go-web-api",
+  "version": "1.0.0",
+  "description": "travel-planner",
+  "main": "server.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MrNiceGuy92/JustGo.git"
+  },
+  "author": "Team Hemingway Special",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/MrNiceGuy92/JustGo/issues"
+  },
+  "homepage": "https://github.com/MrNiceGuy92/JustGo#readme",
+  "dependencies": {
+    "express": "^4.13.3"
+  }
+}

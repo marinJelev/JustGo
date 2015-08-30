@@ -6,7 +6,8 @@ var app = express();
 var env = process.env.NODE_ENV || 'development';
 var config = require('./config/config')[env];
 
-require('./config/express');
+require('./config/express')(app);
+require('./config/mongoose')(app);
 
 app.listen(config.port, function() {
   console.log('Server running on port: ' + config.port);

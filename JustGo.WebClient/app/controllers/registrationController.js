@@ -1,3 +1,5 @@
+import {alertError,alertSuccess} from '../utils/notifier.js';
+
 function init() {
     $('.alert').hide();
     $('#reset-button').on('click', function () {
@@ -13,38 +15,24 @@ function init() {
             currentUserInformation.username = username;
             currentUserInformation.email = email;
             currentUserInformation.password = password;
+            alertSuccess('Successful registration.','fieldset');
             console.log(currentUserInformation);
 
         }
-        else if (!userLoginIsValid(username)) {
-            showUsernameErrorMessage();
+        if (!userLoginIsValid(username)) {
+            alertError('Invalid username! Username must be 4 characters or more.', 'fieldset');
         }
-        else if (!userLoginIsValid(email)) {
-            showEmailErrorMessage();
+        if (!userLoginIsValid(email)) {
+            alertError('Invalid Email!', 'fieldset');
         }
-        else if (!userLoginIsValid(password)) {
-            showPasswordErrorMessage();
+        if (!userLoginIsValid(password)) {
+            alertError('Invalid Password! Password must be 4 characters or more.', 'fieldset');
         }
     });
 }
 
 function userLoginIsValid(userLoginInformation) {
-    if (!userLoginInformation || userLoginInformation.length < 4) {
-        return false;
-    }
-    return true;
-}
-
-function showUsernameErrorMessage() {
-    $('#username-error').show().delay(1500).fadeOut('slow');
-}
-
-function showEmailErrorMessage() {
-    $('#email-error').show().delay(1500).fadeOut('slow');
-}
-
-function showPasswordErrorMessage() {
-    $('#password-error').show().delay(1500).fadeOut('slow');
+    return userLoginInformation && userLoginInformation.length > 3;
 }
 
 export default {init};

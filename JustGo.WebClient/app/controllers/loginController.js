@@ -1,3 +1,5 @@
+import {alertError,alertSuccess} from '../utils/notifier.js';
+
 function init() {
     $('.alert').hide();
     $('#button-reset').click(function () {
@@ -12,21 +14,18 @@ function init() {
         if (userLoginIsValid(username) && userLoginIsValid(password)) {
             currentUserInformation.username = username;
             currentUserInformation.password = password;
+            alertSuccess('Success - You are logged in!','fieldset');
+
             console.log(currentUserInformation);
 
         } else {
-            toggleErrorMessage();
-            setTimeout(toggleErrorMessage, 2000);
+            alertError('Username and password should be minimum 4 letters long.', 'fieldset');
         }
     });
 }
 
 function userLoginIsValid(userLoginInformation) {
-    return userLoginInformation && userLoginInformation.length > 4;
-}
-
-function toggleErrorMessage() {
-    $('.alert').toggle('slow');
+    return userLoginInformation && userLoginInformation.length > 3;
 }
 
 export default {init};

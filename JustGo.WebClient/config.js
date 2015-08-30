@@ -10,7 +10,8 @@
       jqueryRoutes: '../bower_components/jquery-routes/jquery.routes.js',
       routie: '../bower_components/routie/dist/routie.js',
       loginController:'./controllers/loginController.js',
-      registrationController: './controllers/registrationController.js'
+      registrationController: './controllers/registrationController.js',
+
     }
   });
 }());

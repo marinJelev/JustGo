@@ -5,6 +5,7 @@ import routie from 'routie';
 import loginController from 'loginController';
 import registrationController from 'registrationController';
 
+
 routie('globe', function() {
     console.log('Im in globe');
     $('#main-content').load('app/views/globeView.html');

@@ -5,6 +5,7 @@ import routie from 'routie';
 import loginController from 'loginController';
 import registrationController from 'registrationController';
 import tripsController from 'tripsController';
+import homePageController from 'homePageController';
 
 routie('globe', function() {
     console.log('Im in globe');
@@ -23,7 +24,7 @@ routie('register', function() {
 
 routie('home', function() {
     console.log('In home page');
-    $('#main-content').load('app/views/homePageView.html');
+    $('#main-content').load('app/views/homePageView.html', homePageController.init);
 });
 
 //routie('*', function() {

@@ -7,16 +7,10 @@ function init() {
         var currentUserInformation = {},
             username = $('#inputUsername').val(),
             email = $('#inputEmail').val(),
-            password = $('#inputPassword').val();
+            password = $('#inputPassword').val(),
+            retypePassword = $('#retypePassword').val();
 
-        if (userLoginIsValid(username) && userLoginIsValid(password) && userLoginIsValid(email)) {
-            currentUserInformation.username = username;
-            currentUserInformation.email = email;
-            currentUserInformation.password = password;
-            console.log(currentUserInformation);
-
-        }
-        else if (!userLoginIsValid(username)) {
+        if (!userLoginIsValid(username)) {
             showUsernameErrorMessage();
         }
         else if (!userLoginIsValid(email)) {
@@ -25,14 +19,35 @@ function init() {
         else if (!userLoginIsValid(password)) {
             showPasswordErrorMessage();
         }
+        else if (userLoginIsValid(username) && userLoginIsValid(password) && userLoginIsValid(email)) {
+            currentUserInformation.username = username;
+            currentUserInformation.email = email;
+            currentUserInformation.password = password;
+            console.log(currentUserInformation);
+        }
+
+        if (validPasswordAndRetypePassword(password, retypePassword)) {
+             passwordsDontMatchMessage();
+        }
+    });
+
+    $.ajax ({
+        type: 'GET',
+        url: 'localhost:3030/register',
+        data: JSON.stringify(currentUserInformation),
+        contentType: 'application/json',
+        success: function (data) {
+            console.log(data);
+            // call login from loginCtrl
+        },
+        error: function (error) {
+            console.log(error);
+        }
     });
 }
 
 function userLoginIsValid(userLoginInformation) {
-    if (!userLoginInformation || userLoginInformation.length < 4) {
-        return false;
-    }
-    return true;
+    return userLoginInformation && userLoginInformation.length > 3;
 }
 
 function showUsernameErrorMessage() {
@@ -45,6 +60,14 @@ function showEmailErrorMessage() {
 
 function showPasswordErrorMessage() {
     $('#password-error').show().delay(1500).fadeOut('slow');
+}
+
+function passwordsDontMatchMessage() {
+    $('#invalid-passwords').show().delay(1500).fadeOut('slow');
+}
+
+function validPasswordAndRetypePassword(password, newPassword){
+    return  password !== newPassword;
 }
 
 export default {init};

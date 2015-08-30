@@ -9,7 +9,8 @@
       routie: '../bower_components/routie/dist/routie.js',
       loginController:'./controllers/loginController.js',
       registrationController: './controllers/registrationController.js',
-      tripsController: './controllers/tripsController.js'
+      tripsController: './controllers/tripsController.js',
+      homePageController: './controllers/homePageController.js'
     }
   });
 

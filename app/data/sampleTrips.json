@@ -1,0 +1,73 @@
+[
+    {
+        "id": "1",
+        "travelBy": "car",
+        "locationFrom": {
+            "name": "Sofia",
+            "lat": "10",
+            "long": "10"
+        },
+        "locationTo": {
+            "name": "Burgas",
+            "lat": "100",
+            "long": "100"
+        },
+        "locationsThrough": []
+    },
+    {
+        "id": "2",
+        "travelBy": "plane",
+        "locationFrom": {
+            "name": "Sofia",
+            "lat": "10",
+            "long": "10"
+        },
+        "locationTo": {
+            "name": "Varna",
+            "lat": "110",
+            "long": "132"
+        },
+        "locationsThrough": []
+    },
+    {
+        "id": "3",
+        "travelBy": "train",
+        "locationFrom": {
+            "name": "Sofia",
+            "lat": "10",
+            "long": "10"
+        },
+        "locationTo": {
+            "name": "Vidin",
+            "lat": "310",
+            "long": "312"
+        },
+        "locationsThrough": [
+            {
+                "name": "Montana",
+                "lat": "210",
+                "long": "212"
+            },
+            {
+                "name": "Vraca",
+                "lat": "210",
+                "long": "300"
+            }
+        ]
+    },
+    {
+        "id": "4",
+        "travelBy": "foot",
+        "locationFrom": {
+            "name": "Sofia",
+            "lat": "10",
+            "long": "10"
+        },
+        "locationTo": {
+            "name": "Черни връх",
+            "lat": "11",
+            "long": "11"
+        },
+        "locationsThrough": []
+    }
+]

@@ -1,0 +1,18 @@
+{{#each this}}
+<div class="row" style="margin-bottom: 5px">
+    <div class="col-md-6 col-lg-offset-3">
+        <div class="input-group">
+            <span class="input-group-addon"><img src="app/imgs/icons/{{this.travelBy}}.svg" height="23" width="23"></span>
+            <div class="form-control">
+                From {{this.locationFrom.name}} to {{this.locationTo.name}}
+            </div>
+    <span class="input-group-btn"><button class="btn btn-default" id="button-{{this.id}}" type="button">Trip details</button></span>
+        </div>
+        <div class="panel panel-default" id="{{this.id}}" style="margin-top: 3px; margin-bottom: 0px; display: none">
+            <div class="panel-body">
+                Trip details
+            </div>
+        </div>
+    </div>
+</div>
+{{/each}}

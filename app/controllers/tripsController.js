@@ -1,7 +1,8 @@
 function init() {
+
     $.ajax({
         type: 'GET',
-        url: 'app/data/sampleTrips.json',
+        url: '../app/data/sampleTrips.json',
         data: '',
         dataType: 'json',
         success: function (ajaxData) {
@@ -9,9 +10,6 @@ function init() {
             $.get('app/views/tripsView.html', function (templateData) {
                 var tripsTemplate = Handlebars.compile(templateData);
                 $('#main-content').html(tripsTemplate(ajaxData));
-                //var templateReady = tripsTemplate(ajaxData);
-                //
-                //return templateReady;
             });
 
             $('#main-content').on("click", "button", function (ev) {
@@ -25,3 +23,5 @@ function init() {
         }
     });
 }
+
+export default {init};

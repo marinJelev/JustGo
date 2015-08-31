@@ -10,7 +10,6 @@ import homePageController from 'homePageController';
 import globeController from 'globeController';
 import startViewController from 'startViewController';
 
-
 routie('globe', function() {
     console.log('Im in globe');
     $('#main-content').load('app/views/globeView.html', globeController.init);

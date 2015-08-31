@@ -7,7 +7,6 @@ var passport = require('passport');
 
 module.exports = function(app) {
   app.use(cookieParser());
-
   app.use(bodyParser.urlencoded({ extended: true }));
   app.use(bodyParser.json());
   app.use(session({
@@ -17,4 +16,9 @@ module.exports = function(app) {
   }));
   app.use(passport.initialize());
   app.use(passport.session());
+  app.use(function(req, res, next) {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+    next();
+  });
 };

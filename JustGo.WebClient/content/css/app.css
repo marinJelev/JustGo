@@ -71,6 +71,7 @@ html, body {
     bottom: 0;
     height: 50px;
     background-color: #00adee;
+    border-radius: 5px;
     width: 80%;
     display: block;
     margin-left: 130px;

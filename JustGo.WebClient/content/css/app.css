@@ -32,7 +32,7 @@ html, body {
     border-radius: 15px;
 }
 
-#reset-button, #submit-button {
+#reset-button, #submit-button, #button-rest, #button-login {
     margin: 5px;
 }
 
@@ -42,6 +42,9 @@ html, body {
     right: 10px;
 }
 
+.carousel-inner, .carousel-inner .item img {
+    border-radius: 15px;
+}
 .we-pp-wrapper{
     border-radius: 0;
     color: darkslategrey;
@@ -68,6 +71,7 @@ html, body {
     bottom: 0;
     height: 50px;
     background-color: #00adee;
+    border-radius: 5px;
     width: 80%;
     display: block;
     margin-left: 130px;

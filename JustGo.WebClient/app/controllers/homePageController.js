@@ -1,6 +1,8 @@
 function init() {
     $(document).ready(function(){
-        $("#myCarousel").carousel();
+        $('#carousel').carousel({
+            interval: 1000
+        })
     });
 }
 

@@ -20,7 +20,6 @@
 body: {
         "succsess": true,
         "user": {
-          id: "55e3156719a849b01ca24ce7",
           username: "batman"
         }
       }

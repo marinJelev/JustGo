@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  <h3>register</h3>
+  <input type="text" id="reg-username" placeholder="username">
+  <input type="text" id="reg-password" placeholder="password">
+  <input type="text" id="reg-email" placeholder="email">
+  <input type="button" id="register" value="register">
+
+  <h3>login</h3>
+  <input type="text" id="log-username" placeholder="username">
+  <input type="text" id="log-password" placeholder="password">
+  <input type="button" id="login" value="login">
+  <input type="button" id="logout" value="logout">
+
+  <script src="https://code.jquery.com/jquery-2.1.4.js"></script>
+  <script>
+    'use strict';
+
+    function post (url, data) {
+      $.ajax({
+        url: url,
+        method: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify(data),
+        success: function (data) {
+          console.log(JSON.stringify(data));
+        },
+        error: function (error) {
+          console.log(JSON.stringify(error));
+        }
+      });
+    }
+
+    $('#register').on('click', function() {
+      var username = $('#reg-username').val();
+      var password = $('#reg-password').val();
+      var email = $('#reg-email').val();
+
+      var user = {
+        username: username,
+        password: password,
+        email: email
+      };
+
+      post('http://localhost:3030/users', user);
+    });
+
+    $('#login').on('click', function() {
+      var username = $('#log-username').val();
+      var password = $('#log-password').val();
+
+      var user = {
+        username: username,
+        password: password
+      };
+
+      post('http://localhost:3030/login', user);
+    });
+
+    $('#logout').on('click', function() {
+      post('http://localhost:3030/logout');
+    });
+  </script>
+</body>
+</html>

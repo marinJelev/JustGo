@@ -8,7 +8,8 @@ var config = require('./config/config')[env];
 
 require('./config/express')(app);
 require('./config/mongoose')(config);
-require('./config/routes')(app);
+require('./config/passport')();
+require('./config/routes')(app, config);
 
 app.listen(config.port, function() {
   console.log('Server running on port: ' + config.port);

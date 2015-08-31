@@ -11,11 +11,17 @@
   <input type="text" id="reg-email" placeholder="email">
   <input type="button" id="register" value="register">
 
-  <h3>login</h3>
+  <h3>login / logout</h3>
   <input type="text" id="log-username" placeholder="username">
   <input type="text" id="log-password" placeholder="password">
   <input type="button" id="login" value="login">
   <input type="button" id="logout" value="logout">
+
+  <h3>create place</h3>
+  <input type="text" id="latitude" placeholder="latitude">
+  <input type="text" id="longitude" placeholder="longitude">
+  <input type="text" id="name" placeholder="name">
+  <input type="button" id="create-place" value="Create place">
 
   <script src="https://code.jquery.com/jquery-2.1.4.js"></script>
   <script>
@@ -64,6 +70,20 @@
 
     $('#logout').on('click', function() {
       post('http://localhost:3030/logout');
+    });
+
+    $('#create-place').on('click', function() {
+      var latitude = $('#latitude').val();
+      var longitude = $('#longitude').val();
+      var name = $('#name').val();
+
+      var place = {
+        latitude: parseFloat(latitude),
+        longitude: parseFloat(longitude),
+        name: name
+      };
+
+      post('http://localhost:3030/places', place);
     });
   </script>
 </body>

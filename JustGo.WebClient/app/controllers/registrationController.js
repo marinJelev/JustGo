@@ -8,9 +8,12 @@ function init() {
     $('#submit-button').on('click', function () {
         var currentUserInformation = {},
             username = $('#inputUsername').val(),
+            firstName = $('#firstName').val(),
+            lastName = $('#lastName').val(),
             email = $('#inputEmail').val(),
             password = $('#inputPassword').val(),
-            retypedPassword = $('#retypePassword').val();
+            retypedPassword = $('#retypePassword').val(),
+            arePasswordsEqual = true;
 
         if (!userLoginIsValid(username)) {
             alertError('Invalid username! Username must be 4 characters or more.', 'fieldset');
@@ -23,12 +26,16 @@ function init() {
         }
 
         if (password !== retypedPassword) {
+            arePasswordsEqual = false;
             alertError('Passwords don\'t match!', 'fieldset');
         }
-        else if (userLoginIsValid(username) && userLoginIsValid(password) && userLoginIsValid(email)) {
+        else if (userLoginIsValid(username) && userLoginIsValid(password) && userLoginIsValid(email) && arePasswordsEqual) {
             currentUserInformation.username = username;
+            currentUserInformation.firstName = firstName;
+            currentUserInformation.lastName = lastName;
             currentUserInformation.email = email;
             currentUserInformation.password = password;
+            //console.log(currentUserInformation);
             alertSuccess('Successful registration.','fieldset');
         }
     });

@@ -1,7 +1,7 @@
 'use strict';
 
 var mongoose = require('mongoose');
-var UserModel = require('../data/models/User');
+var models = require('../data/models');
 
 module.exports = function(config) {
   mongoose.connect(config.dbConnection);
@@ -15,5 +15,6 @@ module.exports = function(config) {
     console.info('MongoDB up and running...');
   });
 
-  UserModel.init();
+  models.UserModel.init();
+  models.PlaceModel.init();
 };

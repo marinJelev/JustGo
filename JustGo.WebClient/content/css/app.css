@@ -64,7 +64,7 @@ html, body {
 }
 
 .footer{
-    position: absolute;
+    position: fixed;
     bottom: 0;
     height: 50px;
     background-color: #00adee;

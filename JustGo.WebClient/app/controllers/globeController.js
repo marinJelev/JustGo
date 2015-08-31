@@ -56,6 +56,26 @@ function init() {
         });
     });
 
+    //google maps Search input
+    var input = document.getElementById('pac-input');
+    var searchBox = new google.maps.places.SearchBox(input);
+
+    searchBox.addListener('places_changed', function() {
+        var places = searchBox.getPlaces();
+
+        if (places.length == 0) {
+            return;
+        }
+
+        places.forEach(function(place) {
+            console.log(place);
+            var lat = place.geometry.location.G;
+            var long =place.geometry.location.K;
+
+            globe.panTo([lat, long]);
+            addMarker(lat, long)
+        });
+    });
 }
 
 function addMarker(lat, long) {

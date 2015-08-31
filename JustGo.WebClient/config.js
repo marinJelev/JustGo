@@ -10,7 +10,8 @@ System.config({
       registrationController: './controllers/registrationController.js',
       tripsController: './controllers/tripsController.js',
       homePageController: './controllers/homePageController.js',
-      globeController: './controllers/globeController.js'
+      globeController: './controllers/globeController.js',
+      startViewController: './controllers/startViewController.js'
     }
 });
 

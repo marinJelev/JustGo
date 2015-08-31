@@ -7,7 +7,8 @@ import loginController from 'loginController';
 import registrationController from 'registrationController';
 import tripsController from 'tripsController';
 import homePageController from 'homePageController';
-import globeController from 'globeController'
+import globeController from 'globeController';
+import startViewController from 'startViewController';
 
 
 routie('globe', function() {
@@ -36,5 +37,5 @@ routie('home', function() {
 //});
 
 routie('*', function () {
-    tripsController.init();
+    $('#main-content').load('app/views/startView.html', startViewController.init);
 });

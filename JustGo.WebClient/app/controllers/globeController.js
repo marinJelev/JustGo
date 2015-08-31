@@ -1,7 +1,6 @@
 import globe from 'utils/globe.js';
 import geoLocationOfCityService from 'services/getGeoLocationOfCityService.js';
 
-console.log(geoLocationOfCityService);
 var marker;
 var spinning = false;
 var map;
@@ -101,4 +100,4 @@ function addMarker(lat, long) {
 }
 
 export default {init};
-// }());
+

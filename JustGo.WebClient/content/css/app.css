@@ -115,3 +115,9 @@ nav {
     font-size: 13px;
     font-weight: 300;
 }
+
+.alert-pesho {
+    position: absolute;
+    right: 20px;
+    top: 80px;
+}

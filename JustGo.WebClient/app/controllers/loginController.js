@@ -1,31 +1,60 @@
-import {alertError,alertSuccess} from '../utils/notifier.js';
+import notifier from '../utils/notifier.js';
+import auth from '../services/auth.js';
+
+var USERNAME_MIN_VALID_LENGTH = 3,
+    PASSWORD_MIN_VALID_LENGTH = 5,
+    LOGIN_SUCCESS_MESSAGE = 'Success - You are logged in!',
+    INVALID_USERNAME_MESSAGE = 'Username should be minimum ' + USERNAME_MIN_VALID_LENGTH + ' letters long',
+    INVALID_PASSWORD_MESSAGE = 'Password should be minimum ' + PASSWORD_MIN_VALID_LENGTH + ' letters long';
 
 function init() {
-    $('.alert').hide();
-    $('#button-reset').click(function () {
-        $('#login-form').trigger('reset');
+    var $loginForm = $('#login-form'),
+        $buttonLogin = $('#button-login'),
+        $buttonReset = $('#button-reset');
+
+    $buttonReset.on('click', function() {
+        $loginForm.trigger('reset');
     });
 
-    $('#button-login').click(function () {
-        var currentUserInformation = {},
-            username = $('#input-username').val(),
-            password = $('#input-password').val();
-
-        if (userLoginIsValid(username) && userLoginIsValid(password)) {
-            currentUserInformation.username = username;
-            currentUserInformation.password = password;
-            alertSuccess('Success - You are logged in!','fieldset');
-
-            console.log(currentUserInformation);
-
-        } else {
-            alertError('Username and password should be minimum 4 letters long.', 'fieldset');
-        }
-    });
+    $buttonLogin.on('click', handleUserLogin);
 }
 
-function userLoginIsValid(userLoginInformation) {
-    return userLoginInformation && userLoginInformation.length > 3;
+function handleUserLogin() {
+    var $inputUsername = $('#input-username'),
+        $inputPassword = $('#input-password'),
+        currentUser = {},
+        username = $inputUsername.val(),
+        password = $inputPassword.val();
+
+    if (!isValidUsername(username)) {
+        notifier.alertError(INVALID_USERNAME_MESSAGE);
+        return;
+    }
+
+    if (!isValidPassword(password)) {
+        notifier.alertError(INVALID_PASSWORD_MESSAGE);
+        return;
+    }
+
+    currentUser.username = username;
+    currentUser.password = password;
+
+    auth
+        .login(currentUser)
+        .then(function (data) {
+            notifier.alertSuccess(LOGIN_SUCCESS_MESSAGE);
+            $('#menu-unauthorised').toggle();
+            $('#menu-authorised').toggle();
+            routie('/dashboard');
+        });
 }
 
-export default {init};
+function isValidUsername(username) {
+    return username.length >= USERNAME_MIN_VALID_LENGTH;
+}
+
+function isValidPassword(password) {
+    return password.length >= PASSWORD_MIN_VALID_LENGTH;
+}
+
+export default { init };

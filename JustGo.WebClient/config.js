@@ -4,14 +4,7 @@ System.config({
     map: {
       babel: '../node_modules/babel-core/browser.js',
       jquery: '../bower_components/jquery/dist/jquery.js',
-      jqueryRoutes: '../bower_components/jquery-routes/jquery.routes.js',
       routie: '../bower_components/routie/dist/routie.js',
-      loginController:'./controllers/loginController.js',
-      registrationController: './controllers/registrationController.js',
-      tripsController: './controllers/tripsController.js',
-      homePageController: './controllers/homePageController.js',
-      globeController: './controllers/globeController.js',
-      startViewController: './controllers/startViewController.js'
+      bootstrap: '../bower_components/bootstrap/dist/js/bootstrap.js'
     }
 });
-

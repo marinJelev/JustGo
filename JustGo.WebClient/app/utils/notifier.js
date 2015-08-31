@@ -1,11 +1,11 @@
-export function alertError(message, $selector) {
+ function alertError(message, $selector) {
     var alertDiv = createAlertDiv()
         .addClass('alert-danger')
         .text(message);
     showAlert(alertDiv, $selector);
 }
 
-export function alertSuccess(message, $selector) {
+ function alertSuccess(message, $selector) {
     var alertDiv = createAlertDiv()
         .addClass('alert-success')
         .text(message);
@@ -22,12 +22,14 @@ function alertInfo(message, $selector, link) {
 }
 
 function createAlertDiv() {
-    return $('<div class="alert alert-dismissible ">');
+    return $('<div class="alert alert-dismissible alert-pesho">');
 }
 
 function showAlert(alertDiv, $selector) {
-    $($selector).prepend(alertDiv);
+    $('body').append(alertDiv);
     alertDiv.fadeOut(5000, function () {
         alertDiv.remove();
     });
 }
+
+export default { alertError, alertSuccess };

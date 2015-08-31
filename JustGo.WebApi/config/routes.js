@@ -8,6 +8,8 @@ module.exports = function(app, config) {
   app.post('/login', controllers.auth.login);
   app.post('/logout', controllers.auth.logout);
 
+  app.post('/places', controllers.places.create);
+
   /* for testing purposes */
   app.get('/', function(req, res) {
     res.sendFile(config.rootPath + '/public/index.html');

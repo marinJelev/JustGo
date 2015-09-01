@@ -22,8 +22,8 @@ function init() {
             globe.spin();
         } else {
             geoLocationOfCityService.getAllCountry(function (data) {
-                console.log(data);
-                console.log(data.length);
+                //console.log(data);
+                //console.log(data.length);
                 var randomCountry = data[Math.random() * 250 | 0];
                 var lat = randomCountry[1];
                 var long = randomCountry[2];
@@ -43,8 +43,8 @@ function init() {
 
     $('#random').click(function () {
         geoLocationOfCityService.getAllCountry(function (data) {
-            console.log(data);
-            console.log(data.length);
+            //console.log(data);
+            //console.log(data.length);
             var randomCountry = data[Math.random() * 250 | 0];
             var lat = randomCountry[1];
             var long = randomCountry[2];
@@ -67,7 +67,7 @@ function init() {
         }
 
         places.forEach(function(place) {
-            console.log(place);
+            //console.log(place);
             var lat = place.geometry.location.G;
             var long =place.geometry.location.K;
 
@@ -85,18 +85,25 @@ function addMarker(lat, long) {
     var countryData;
 
     marker = WE.marker([lat, long]).addTo(map);
+
     console.log(lat, long);
     geoLocationOfCityService.getCityByGeoLocation(lat, long, function (data) {
-        console.log(data);
+       // console.log(data);
         countryData = data.results;
         var countryDataLastIndex = countryData.length - 1;
 
-        console.log(countryData[countryDataLastIndex]);
+      //  console.log(countryData[countryDataLastIndex]);
         marker.bindPopup("<b>Country: " + countryData[countryDataLastIndex]['formatted_address'] +
             "</b><br>State: " + countryData[countryDataLastIndex - 1]['formatted_address'] +
             " <br /><span style='font-size:10px;color:#999'>City: " + countryData[countryDataLastIndex - 2]['formatted_address'] +
-            "</span>", {maxWidth: 150, closeButton: true}).openPopup();
+            "</span><br /> <input class='btn btn-success btn-xs pool-right' type='submit' value='add Place'/>", {maxWidth: 150, closeButton: true}).openPopup();
     });
+
+
+    setTimeout(function () {
+        $('.we-pp-close').removeAttr('href');
+    }, 500)
+
 }
 
 export default {init};

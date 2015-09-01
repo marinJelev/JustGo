@@ -5,11 +5,16 @@ import globeHelper from 'utils/globeHelper.js';
 var marker,
     map,
     spinning = false,
-    wrapper = $('#wrapper');
+    wrapper = $('#wrapper'),
+    place,
+    places,
+    trip;
 
 function init() {
     var input = document.getElementById('pac-input'),
         searchBox = new google.maps.places.SearchBox(input);
+        place = {};
+        places = [];
 
     map = globe.init();
 
@@ -72,6 +77,23 @@ wrapper.on('click', '#random', function () {
     });
 });
 
+wrapper.on('click', '#add-place', function(){
+console.log(place);
+    addPlace(place);
+});
+
+function addPlace(place){
+    places.push(place);
+
+    if(places.length == 1){
+        $('#trip').show();
+    }
+
+   var placeHtml = globeHelper.placeHtml(place, place.length);
+    $('#trip').append(placeHtml);
+
+}
+
 function addMarker(lat, long) {
     var popUpInnerHtml,
         countryData;
@@ -84,6 +106,12 @@ function addMarker(lat, long) {
     geoLocationOfCityService.getCityByGeoLocation(lat, long, function (data) {
 
         countryData = data.results;
+        place = {
+            name: countryData[countryData.length -2].formatted_address,
+            lat: lat,
+            long: long
+        };
+
         popUpInnerHtml = globeHelper.popUpInnerHtml(countryData);
         marker.bindPopup(popUpInnerHtml, {maxWidth: 150, closeButton: true}).openPopup();
     });

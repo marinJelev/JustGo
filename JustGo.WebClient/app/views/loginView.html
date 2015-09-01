@@ -1,28 +1,31 @@
-<div class="row">
-  <div class="col-md-6 col-lg-offset-3">
-    <form class="form-horizontal" id="login-form">
-      <fieldset>
-        <legend>Login</legend>
-        <div class="form-group">
-          <label for="input-username" class="col-md-2 control-label">Username</label>
-          <div class="col-md-10">
-            <input type="text" class="form-control" id="input-username" placeholder="Username">
-          </div>
+<div id="login-view">
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <form class="form-horizontal" id="login-form">
+                <fieldset>
+                    <legend>Login</legend>
+                    <div class="form-group">
+                        <label for="input-username" class="col-md-4 control-label">Username</label>
+                        <div class="col-md-8">
+                            <input type="text" class="form-control" id="input-username" placeholder="Username">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="input-password" class="col-md-4 control-label">Password</label>
+                        <div class="col-md-8">
+                            <input type="password" class="form-control has-error" id="input-password" placeholder="Password">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <div class="pull-right">
+                                <input type="reset" class="btn btn-primary" id="button-reset" value="Reset">
+                                <input type="button" class="btn btn-success" id="button-login" value="Login">
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
         </div>
-        <div class="form-group">
-          <label for="input-password" class="col-md-2 control-label">Password</label>
-          <div class="col-md-10">
-            <input type="text" class="form-control has-error" id="input-password" placeholder="Password">
-          </div>
-        </div>
-        <div class="form-group">
-          <div class="col-md-10 col-md-offset-2">
-            <input type="reset" class="btn btn-primary" id="button-reset" value="Reset">
-            <input type="button" class="btn btn-success" id="button-login" value="Login">
-            <input type="button" class="btn btn-success" id="button-logout" value="Logout">
-          </div>
-        </div>
-      </fieldset>
-    </form>
-  </div>
+    </div>
 </div>

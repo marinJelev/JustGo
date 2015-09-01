@@ -2,18 +2,17 @@ import identity from '../services/identity.js';
 
 function init() {
     if (identity.getCurrentUser()) {
-        $('#menu-authorised').toggle();
+        $('.authorized').show();
+        $('.unauthorized').hide();
     } else {
-        $('#menu-unauthorised').toggle();
+        $('.authorized').hide();
+        $('.unauthorized').show();
     }
+
+    $('#main-content').load('app/views/homeView.html');
+
 }
 
-export default { init };
-
-// function init() {
-//     $(document).ready(function(){
-//         $('#carousel').carousel({
-//             interval: 1000
-//         })
-//     });
-// }
+export default {
+    init
+};

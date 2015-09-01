@@ -7,7 +7,6 @@ var $TEMPLATE_TARGET = $('#main-content');
 function init() {
 
     var promise = new Promise(function(resolve, reject) {
-
         httpRequester
             .get(TRIPS_URL, ' ')
             .then(function(data) {

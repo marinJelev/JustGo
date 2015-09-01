@@ -3,7 +3,6 @@ html, body {
     margin: 0;
 }
 
-
 .carousel-inner, .carousel-inner .item img {
     border-radius: 15px;
 }
@@ -105,5 +104,9 @@ nav {
     position: absolute;
     right: 20px;
     top: 80px;
+}
+
+.authorized, .unauthorized {
+    display: none;
 }
 

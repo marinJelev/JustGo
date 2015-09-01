@@ -17,10 +17,19 @@ function login(user) {
     return promise;
 }
 
-function logout(user) {
-    httpRequester.post(LOGOUT_URL).then(function(data) {
-        identity.setCurrentUser('');
+function logout() {
+    var promise = new Promise(function(resolve, reject) {
+        httpRequester
+            .post(LOGOUT_URL)
+            .then(function(data) {
+                identity.setCurrentUser('');
+                resolve();
+            });
     });
+
+    return promise;
 }
 
-export default { login, logout };
+export default {
+    login, logout
+};

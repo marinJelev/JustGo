@@ -1,3 +1,4 @@
+import identity from '../services/identity.js';
 import notifier from '../utils/notifier.js';
 import auth from '../services/auth.js';
 
@@ -8,6 +9,15 @@ var USERNAME_MIN_VALID_LENGTH = 3,
     INVALID_PASSWORD_MESSAGE = 'Password should be minimum ' + PASSWORD_MIN_VALID_LENGTH + ' letters long';
 
 function init() {
+    if (identity.getCurrentUser()) {
+        routie('/home');
+        return;
+    }
+
+    $('#main-content').load('app/views/loginView.html', bindEvents);
+}
+
+function bindEvents() {
     var $loginForm = $('#login-form'),
         $buttonLogin = $('#button-login'),
         $buttonReset = $('#button-reset');
@@ -41,11 +51,9 @@ function handleUserLogin() {
 
     auth
         .login(currentUser)
-        .then(function (data) {
+        .then(function(data) {
             notifier.alertSuccess(LOGIN_SUCCESS_MESSAGE);
-            $('#menu-unauthorised').toggle();
-            $('#menu-authorised').toggle();
-            routie('/dashboard');
+            routie('/home');
         });
 }
 
@@ -57,4 +65,6 @@ function isValidPassword(password) {
     return password.length >= PASSWORD_MIN_VALID_LENGTH;
 }
 
-export default { init };
+export default {
+    init
+};

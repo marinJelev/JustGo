@@ -2,50 +2,40 @@ import $ from 'jquery';
 import routie from 'routie';
 import bootstrap from 'bootstrap';
 
+import auth from 'services/auth.js';
 import identity from 'services/identity.js';
 import homeController from 'controllers/homeController.js';
+import registerController from 'controllers/registerController.js';
 import loginController from 'controllers/loginController.js';
-// import registrationController from 'controllers/registrationController.js';
+import tripsController from 'controllers/tripsController.js';
 import globeController from 'controllers/globeController.js';
 
-$('#menu-authorised').hide();
-$('#menu-unauthorised').hide();
+routie('/home',  homeController.init);
+routie('/register',  registerController.init);
+routie('/login', loginController.init);
+routie('/trips', tripsController.init);
 
-routie('/home', function() {
-    $('#main-content').load('app/views/homeView.html');
-});
-
-routie('register', function() {
-    $('#main-content').load('app/views/registrationView.html', registrationController.init);
-});
-
-routie('/login', function() {
-
-    if (identity.getCurrentUser()) {
-        routie('/dashboard');
+routie('/globe', function() {
+    if (!identity.getCurrentUser()) {
+        routie('/home');
         return;
     }
 
-    $('#main-content').load('app/views/loginView.html', loginController.init);
-});
-
-routie('/dashboard', function() {
-    $('#main-content').load('app/views/dashboardView.html');
-});
-
-routie('/globe', function() {
     $('#main-content').load('app/views/globeView.html', globeController.init);
-    // $('.container').css('position', 'relative');
 });
 
 routie('*', function() {
     routie('/home');
 });
 
-routie('/home');
+$('#logout').on('click', function(ev) {
+    ev.preventDefault();
 
-if (identity.getCurrentUser()) {
-    $('#menu-authorised').toggle();
-} else {
-    $('#menu-unauthorised').toggle();
-}
+    auth
+        .logout()
+        .then(function() {
+            routie('/home', homeController.init);
+        });
+});
+
+routie('/home');

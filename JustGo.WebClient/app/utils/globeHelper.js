@@ -14,10 +14,10 @@ function placeHtml(place, id) {
         '<span>' + place.name + '</span>' +
         '</div>' +
         '<div class="col-sm-4">' +
-        '<input type="submit"  class="btn btn-success btn-xs" value="Save Place"/>' +
+        '<input type="submit"  class="btn btn-success btn-xs save-place" value="Save Place"/>' +
         '</div>' +
         '<div class="col-sm-4">' +
-        '<input type="submit" class="btn btn-danger btn-xs" value="Remove Place"/>' +
+        '<input type="submit" class="btn btn-danger btn-xs remove-place" value="Remove Place"/>' +
         '</div>' +
         '</li>';
 }

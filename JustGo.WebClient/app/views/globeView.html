@@ -13,18 +13,20 @@
             <input id="pac-input" class="controls" type="text" placeholder="Search Box">
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-4">
-            <ul class="list-group" id="trip">
-            </ul>
+    <div id="trip-container">
+        <div class="row">
+            <div class="col-md-4">
+                <ul class="list-group" id="place-container">
+                </ul>
+            </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-lg-2">
-            <input class="btn btn-success " type="submit" value="Make Trip"/>
-        </div>
-        <div class="col-lg-2">
-            <input class="btn btn-danger" type="submit" value="Remove All"/>
+        <div class="row">
+            <div class="col-lg-2">
+                <input class="btn btn-success" id="save-trip" type="submit" value="Make Trip"/>
+            </div>
+            <div class="col-lg-2">
+                <input class="btn btn-danger" id="remove-all" type="submit" value="Remove All"/>
+            </div>
         </div>
     </div>
 </div>

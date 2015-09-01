@@ -1,19 +1,69 @@
-<div id="map"></div>
-<div id="globe-buttons">
-    <div class="row">
-        <div class="col-lg-4">
-            <input id="fly" class="btn btn-success " onclick="globe.panTo([65, -19]);" value="Fly to City"/>
+<div id="globe-view">
+    <div id="map"></div>
+    <div class="row globe-buttons">
+        <div class="col-md-4">
+            <input id="random" class="btn btn-success btn-block" type="submit" value="Random Country"/>
         </div>
-        <div class="col-lg-4">
-            <input id="random" class="btn btn-success" value="Random Country"/>
-        </div>
-        <div class="col-lg-4">
-            <input id="spin" class="btn btn-success " value="Spin"/>
+        <div class="col-md-4">
+            <input id="spin" class="btn btn-success btn-block" type="submit" value="Spin"/>
         </div>
     </div>
     <div class="row">
         <div class="col-md-4 col-md-offset-8">
             <input id="pac-input" class="controls" type="text" placeholder="Search Box">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <ul class="list-group">
+                <li class="list-group-item row">
+                    <div class="col-sm-4">
+                        <input type="checkbox" />
+                        <span>first</span>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <input type="submit"  class="btn btn-success btn-xs" value="Save Place"/>
+                    </div>
+                    <div class="col-sm-4">
+                        <input type="submit" class="btn btn-danger btn-xs" value="Remove Place"/>
+                    </div>
+                </li>
+                <li class="list-group-item row">
+                    <div class="col-sm-4">
+                        <input type="checkbox" />
+                        <span>first</span>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <input type="submit"  class="btn btn-success btn-xs" value="Save Place"/>
+                    </div>
+                    <div class="col-sm-4">
+                        <input type="submit" class="btn btn-danger btn-xs" value="Remove Place"/>
+                    </div>
+                </li>
+                <li class="list-group-item row">
+                    <div class="col-sm-4">
+                        <input type="checkbox" />
+                        <span>first</span>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <input type="submit"  class="btn btn-success btn-xs" value="Save Place"/>
+                    </div>
+                    <div class="col-sm-4">
+                        <input type="submit" class="btn btn-danger btn-xs" value="Remove Place"/>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-2">
+            <input class="btn btn-success " type="submit" value="Make Trip"/>
+        </div>
+        <div class="col-lg-2">
+            <input class="btn btn-danger" type="submit" value="Remove All"/>
         </div>
     </div>
 </div>

@@ -7,11 +7,13 @@ import identity from 'services/identity.js';
 import homeController from 'controllers/homeController.js';
 import registerController from 'controllers/registerController.js';
 import loginController from 'controllers/loginController.js';
+import tripsController from 'controllers/tripsController.js';
 import globeController from 'controllers/globeController.js';
 
 routie('/home',  homeController.init);
 routie('/register',  registerController.init);
 routie('/login', loginController.init);
+routie('/trips', tripsController.init);
 
 routie('/globe', function() {
     if (!identity.getCurrentUser()) {

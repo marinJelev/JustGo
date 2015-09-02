@@ -1,0 +1,20 @@
+[
+    {
+        "_id": "1",
+        "country": "Bulgaria",
+        "state": "Sofia, Bulgaria",
+        "city": "Sofia-city, Bulgaria",
+        "latitude": "10.54243",
+        "longitude": "10.124235345",
+        "createdBy" : "Pesho"
+    },
+    {
+        "_id": "2",
+        "country": "France",
+        "state": "Paris, Paris",
+        "city": "Paris",
+        "latitude": "10.1242323",
+        "longitude": "23.2352353",
+        "createdBy" : "Avram"
+    }
+]

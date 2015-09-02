@@ -1,6 +1,6 @@
 [
     {
-        "id": "1",
+        "_id": "1",
         "travelBy": "car",
         "locationFrom": {
             "name": "Sofia",
@@ -15,7 +15,7 @@
         "locationsThrough": []
     },
     {
-        "id": "2",
+        "_id": "2",
         "travelBy": "plane",
         "locationFrom": {
             "name": "Sofia",
@@ -30,7 +30,7 @@
         "locationsThrough": []
     },
     {
-        "id": "3",
+        "_id": "3",
         "travelBy": "train",
         "locationFrom": {
             "name": "Sofia",
@@ -56,7 +56,7 @@
         ]
     },
     {
-        "id": "4",
+        "_id": "4",
         "travelBy": "foot",
         "locationFrom": {
             "name": "Sofia",

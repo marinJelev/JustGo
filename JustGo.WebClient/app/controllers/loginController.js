@@ -1,6 +1,7 @@
 import identity from '../services/identity.js';
 import notifier from '../utils/notifier.js';
 import auth from '../services/auth.js';
+import CryptoJS from '../../node_modules/crypto-js/crypto-js.js';
 
 var USERNAME_MIN_VALID_LENGTH = 3,
     PASSWORD_MIN_VALID_LENGTH = 5,
@@ -35,7 +36,7 @@ function handleUserLogin() {
         currentUser = {},
         username = $inputUsername.val(),
         password = $inputPassword.val(),
-        encryptedPassword = CryptoJS.SHA256(password);
+        encryptedPassword = CryptoJS.SHA256(password).toString();
 
     if (!isValidUsername(username)) {
         notifier.alertError(INVALID_USERNAME_MESSAGE);

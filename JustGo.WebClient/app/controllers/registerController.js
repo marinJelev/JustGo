@@ -1,6 +1,7 @@
 import identity from '../services/identity.js';
 import notifier from '../utils/notifier.js';
 import users from '../data/users.js';
+import CryptoJS from '../../node_modules/crypto-js/crypto-js.js';
 
 var USERNAME_MIN_VALID_LENGTH = 3,
     PASSWORD_MIN_VALID_LENGTH = 5,
@@ -25,7 +26,7 @@ function bindEvents(argument) {
         $resetButton = $('#reset-button'),
         $submitButton = $('#submit-button');
 
-    $resetButton.on('click', function() {
+    $resetButton.on('click', function () {
         $registrationForm.trigger('reset');
     });
 
@@ -40,7 +41,7 @@ function handleRegistrationLogic() {
         email = $('#inputEmail').val(),
         password = $('#inputPassword').val(),
         retypedPassword = $('#retypePassword').val(),
-        encryptedPassword = CryptoJS.SHA256(password);
+        encryptedPassword = CryptoJS.SHA256(password).toString();
 
     if (!isValidUsername(username)) {
         notifier.alertError(INVALID_USERNAME_MESSAGE);
@@ -64,11 +65,11 @@ function handleRegistrationLogic() {
 
     users
         .create(currentUser)
-        .then(function(user) {
+        .then(function (user) {
             notifier.alertSuccess(REGISTRATION_SUCCESS_MESSAGE);
             routie('/login');
         })
-        .catch(function(err) {
+        .catch(function (err) {
             notifier.alertError(err);
         });
 }

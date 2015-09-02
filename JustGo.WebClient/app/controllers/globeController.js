@@ -1,6 +1,12 @@
 import globe from 'utils/globe.js';
 import persister from '../services/persister.js';
 import templateGenerator from 'utils/templateGenerator.js';
+import identity from '../services/identity.js';
+
+var URL = {
+    POPUP: 'app/views/globePopUp.html',
+    PLACE: 'app/views/globePlace.html'
+};
 
 var marker,
     map,
@@ -54,18 +60,16 @@ $wrapper.on('click', '#spin', function () {
     if (spinning) {
         globe.spin();
     } else {
-        persister.getAllCountry(function (data) {
-            var randomCountry = data[Math.random() * 250 | 0];
-            var lat = randomCountry[1];
-            var long = randomCountry[2];
+        persister.getAllCountry()
+            .then(function (data) {
+                var position = setMarkerOnRandomPosition(data);
 
-            addMarker(lat, long);
-            globe.spin();
+                globe.spin();
 
-            setTimeout(function () {
-                globe.panTo([lat, long]);
-            }, 50)
-        });
+                setTimeout(function () {
+                    globe.panTo(position);
+                }, 50)
+            });
     }
 });
 
@@ -73,17 +77,13 @@ $wrapper.on('click', '#random', function () {
     persister
         .getAllCountry()
         .then(function (data) {
-            var randomCountry = data[Math.random() * 250 | 0];
-            var lat = randomCountry[1];
-            var long = randomCountry[2];
+            var position = setMarkerOnRandomPosition(data);
 
-            addMarker(lat, long);
-            globe.panTo([lat, long]);
+            globe.panTo(position);
         });
 });
 
 $wrapper.on('click', '#add-place', function () {
-    console.log(place);
     addPlace(place);
 });
 
@@ -93,6 +93,7 @@ $wrapper.on('click', '.save-place', function () {
     var index = $parentLi.attr('data-id') - 1;
 
     var place = places[index];
+    place.createdBy = identity.getCurrentUser()
 
     persister
         .savePlace(place)
@@ -129,6 +130,16 @@ $wrapper.on('click', '#remove-all', function () {
 
 });
 
+function setMarkerOnRandomPosition(data) {
+    var randomCountry = data[Math.random() * 250 | 0];
+    var lat = randomCountry[1];
+    var long = randomCountry[2];
+
+    addMarker(lat, long);
+
+    return [lat, long];
+}
+
 function addPlace(place) {
     places.push(place);
 
@@ -136,12 +147,12 @@ function addPlace(place) {
         name: place.name,
         latitude: place.latitude,
         longitude: place.longitude,
-        id : places.length
+        id: places.length
     };
 
     templateGenerator
-        .get('app/views/globePlace.html')
-        .then(function(template){
+        .get(URL.PLACE)
+        .then(function (template) {
             $placeContainer.append(template(templateObject));
         });
 
@@ -161,9 +172,7 @@ function addMarker(lat, long) {
     persister
         .getCityByGeoLocation(lat, long)
         .then(function (data) {
-            console.log(data);
             countryData = data.results;
-            console.log(countryData);
             place = {
                 name: countryData[countryData.length - 2].formatted_address,
                 latitude: lat,
@@ -171,14 +180,14 @@ function addMarker(lat, long) {
             };
 
             templateGenerator
-                .get('app/views/globePopUp.html')
-                .then(function(template){
-                    var countryDataLastIndex = countryData.length -1;
-                    var templateObject = {
-                        Name: countryData[countryDataLastIndex].formatted_address,
-                        state: countryData[countryDataLastIndex - 1].formatted_address,
-                        city: countryData[countryDataLastIndex - 2].formatted_address
-                    };
+                .get(URL.POPUP)
+                .then(function (template) {
+                    var countryDataLastIndex = countryData.length - 1,
+                        templateObject = {
+                            Name: countryData[countryDataLastIndex].formatted_address,
+                            state: countryData[countryDataLastIndex - 1].formatted_address,
+                            city: countryData[countryDataLastIndex - 2].formatted_address
+                        };
 
                     marker.bindPopup(template(templateObject), {maxWidth: 150, closeButton: true}).openPopup();
                 });
@@ -189,7 +198,6 @@ function addMarker(lat, long) {
     }, 500)
 
 }
-
 
 export default {init};
 

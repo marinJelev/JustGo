@@ -1,3 +1,4 @@
+import Handlebars from '../../bower_components/handlebars/handlebars.js';
 import httpRequester from 'utils/http-requester.js'
 
 var instance = null;

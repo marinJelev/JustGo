@@ -34,7 +34,8 @@ function handleUserLogin() {
         $inputPassword = $('#input-password'),
         currentUser = {},
         username = $inputUsername.val(),
-        password = $inputPassword.val();
+        password = $inputPassword.val(),
+        encryptedPassword = CryptoJS.SHA256(password);
 
     if (!isValidUsername(username)) {
         notifier.alertError(INVALID_USERNAME_MESSAGE);
@@ -47,7 +48,7 @@ function handleUserLogin() {
     }
 
     currentUser.username = username;
-    currentUser.password = password;
+    currentUser.password = encryptedPassword;
 
     auth
         .login(currentUser)

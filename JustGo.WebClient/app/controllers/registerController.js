@@ -39,7 +39,8 @@ function handleRegistrationLogic() {
         lastName = $('#lastName').val(),
         email = $('#inputEmail').val(),
         password = $('#inputPassword').val(),
-        retypedPassword = $('#retypePassword').val();
+        retypedPassword = $('#retypePassword').val(),
+        encryptedPassword = CryptoJS.SHA256(password);
 
     if (!isValidUsername(username)) {
         notifier.alertError(INVALID_USERNAME_MESSAGE);
@@ -59,7 +60,7 @@ function handleRegistrationLogic() {
     currentUser.firstName = firstName;
     currentUser.lastName = lastName;
     currentUser.email = email;
-    currentUser.password = password;
+    currentUser.password = encryptedPassword;
 
     users
         .create(currentUser)

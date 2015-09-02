@@ -1,16 +1,12 @@
 {{#each this}}
-<div class="col-md-12">
-    <div class="row">
-        <div class="col-md-10">
-            <ul class="breadcrumb">
-                <li>Country: {{this.country}}</li>
-                <li>State: {{this.state}}</li>
-                <li>City: {{this.city}}</li>
-            </ul>
-        </div>
-        <div class="col-md-2">
-            <a href="#" class="btn btn-primary btn-sm">Place details</a>
+    <div class="list-group">
+        <div class="col-md-12 list-group-item place-container">
+            <div class="col-md-10 place-inner-div">
+                <span class="text-warning">Country: {{this.country}}</span>
+                <span class="text-success place-info-inner">State: {{this.state}}</span>
+                <span class="text-info place-info-inner">City: {{this.city}}</span>
+            </div>
+            <a href="#" class="btn btn-primary btn-sm pull-right">Place details</a>
         </div>
     </div>
-</div>
 {{/each}}

@@ -1,6 +1,7 @@
 import httpRequester from '../utils/http-requester.js';
 import Handlebars from '../../bower_components/handlebars/handlebars.js';
 import templateGenerator from 'utils/templateGenerator.js';
+import map from 'utils/map.js';
 
 var TRIPS_URL = '../app/data/sampleTrips.json';
 var TRIPS_TEMPLATE = 'app/templates/trips.handlebars';
@@ -18,6 +19,7 @@ function bindEvents() {
         .get(TRIPS_URL)
         .then(function (data) {
             trips = data;
+            console.log(trips);
             templateGenerator
                 .get(TRIPS_TEMPLATE)
                 .then(function (template) {
@@ -25,12 +27,16 @@ function bindEvents() {
                 });
 
         });
+
+    map.init();
 }
 
 $TEMPLATE_TARGET.on("click", "button", function (ev) {
-    console.log('event fired');
-    var divID = '#' + ev.target.id.split('-')[1];
+    var id = ev.target.id.split('-')[1];
+    var divID = '#' + id;
+    
     $(divID).toggle("slow");
+    map.calculateAndDisplayRoute(trips[id -1])
 });
 
 export default {init};

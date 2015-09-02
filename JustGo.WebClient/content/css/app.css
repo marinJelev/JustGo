@@ -102,6 +102,42 @@ nav {
 
 /*end of google maps search input*/
 
+ /*google maps*/
+#map {
+    margin-top: 15px;
+    height: 400px;
+}
+
+#panel {
+    position: absolute;
+    top: 10px;
+    left: 25%;
+    z-index: 5;
+    background-color: #fff;
+    padding: 5px;
+    border: 1px solid #999;
+    text-align: center;
+}
+
+#panel, .panel {
+    font-family: 'Roboto','sans-serif';
+    line-height: 30px;
+    padding-left: 10px;
+}
+
+#panel select, #panel input, .panel select, .panel input {
+    font-size: 15px;
+}
+
+#panel select, .panel select {
+    width: 100%;
+}
+
+#panel i, .panel i {
+    font-size: 12px;
+}
+/*end google maps*/
+
 .alert-pesho {
     position: absolute;
     right: 20px;

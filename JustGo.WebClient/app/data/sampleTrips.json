@@ -4,13 +4,13 @@
         "travelBy": "car",
         "locationFrom": {
             "name": "Sofia",
-            "lat": "10",
-            "long": "10"
+            "lat": "42.6977082",
+            "long": "23.321867500000053"
         },
         "locationTo": {
-            "name": "Burgas",
-            "lat": "100",
-            "long": "100"
+            "name": "Plovdiv",
+            "lat": "42.1354079",
+            "long": "24.74529039999993"
         },
         "locationsThrough": []
     },
@@ -24,8 +24,8 @@
         },
         "locationTo": {
             "name": "Varna",
-            "lat": "110",
-            "long": "132"
+            "lat": "3",
+            "long": "4"
         },
         "locationsThrough": []
     },
@@ -39,19 +39,19 @@
         },
         "locationTo": {
             "name": "Vidin",
-            "lat": "310",
-            "long": "312"
+            "lat": "23",
+            "long": "45"
         },
         "locationsThrough": [
             {
                 "name": "Montana",
-                "lat": "210",
-                "long": "212"
+                "lat": "34",
+                "long": "22"
             },
             {
                 "name": "Vraca",
-                "lat": "210",
-                "long": "300"
+                "lat": "19",
+                "long": "3"
             }
         ]
     },

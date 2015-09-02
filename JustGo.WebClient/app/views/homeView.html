@@ -16,45 +16,61 @@
 </div>
 
 
-
-
-<!-- <div class="row">
-    <div class="col-md-2">
-    </div>
-    <div class="col-md-8">
-        <div class="jumbotron">
-            <img src="app/imgs/JustGo.jpg" alt="Logo" id="jumbotron"/>
+<div class="carousel slide" id="myCarousel">
+    <ol class="carousel-indicators">
+        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#myCarousel" data-slide-to="1" class=""></li>
+        <li data-target="#myCarousel" data-slide-to="2" class=""></li>
+        <li data-target="#myCarousel" data-slide-to="3" class=""></li>
+        <li data-target="#myCarousel" data-slide-to="4" class=""></li>
+        <li data-target="#myCarousel" data-slide-to="5" class=""></li>
+    </ol>
+    <div class="carousel-inner">
+        <div class="item active">
+            <div class="col-md-2"><a href="#"><img src="./app/imgs/rio.jpg" class="img-responsive"></a></div>
         </div>
-        <div id="myCarousel" class="carousel slide" data-interval="1000" data-ride="carousel">
-            <ol class="carousel-indicators">
-                <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-                <li data-target="#myCarousel" data-slide-to="1"></li>
-                <li data-target="#myCarousel" data-slide-to="2"></li>
-                <li data-target="#myCarousel" data-slide-to="3"></li>
-            </ol>
-            <div class="carousel-inner">
-                <div class="item">
-                    <img src="app/imgs/iceland.jpg" alt="Iceland" class="img-responsive">
-                </div>
-                <div class="item active">
-                    <img src="app/imgs/iceland.jpg" alt="Sofia" class="img-responsive">
-                </div>
-                <div class="item">
-                    <img src="app/imgs/iceland.jpg" alt="Rio" class="img-responsive">
-                </div>
-                <div class="item">
-                    <img src="app/imgs/iceland.jpg" alt="India" class="img-responsive">
-                </div>
-            </div>
-            <a class="carousel-control left" data-slide="prev">
-                <span class="glyphicon glyphicon-chevron-left"></span>
-            </a>
-            <a class="carousel-control right" data-slide="next">
-                <span class="glyphicon glyphicon-chevron-right"></span>
-            </a>
+        <div class="item">
+            <div class="col-md-2"><a href="#"><img src="./app/imgs/iceland.jpg" class="img-responsive"></a></div>
         </div>
-        <div class="col-md-2">
+        <div class="item">
+            <div class="col-md-2"><a href="#"><img src="./app/imgs/rio.jpg" class="img-responsive"></a></div>
+        </div>
+        <div class="item">
+            <div class="col-md-2"><a href="#"><img src="./app/imgs/paris.jpg" class="img-responsive"></a></div>
+        </div>
+        <div class="item">
+            <div class="col-md-2"><a href="#"><img src="./app/imgs/paris.jpg" class="img-responsive"></a></div>
+        </div>
+        <div class="item">
+            <div class="col-md-2"><a href="#"><img src="./app/imgs/NewYork.jpg" class="img-responsive"></a></div>
         </div>
     </div>
+    <a class="left carousel-control" href="#myCarousel" data-slide="prev"><i
+        class="glyphicon glyphicon-chevron-left"></i></a>
+    <a class="right carousel-control" href="#myCarousel" data-slide="next"><i
+        class="glyphicon glyphicon-chevron-right"></i></a>
 </div>
--->
+
+<script>
+    $('#myCarousel').carousel({
+        interval: 4000
+    });
+
+    $('.carousel .item').each(function () {
+        var next = $(this).next();
+        if (!next.length) {
+            next = $(this).siblings(':first');
+        }
+        next.children(':first-child').clone().appendTo($(this));
+
+        for (var i = 0; i < 4; i++) {
+            next = next.next();
+            if (!next.length) {
+                next = $(this).siblings(':first');
+            }
+
+            next.children(':first-child').clone().appendTo($(this));
+        }
+    });
+</script>
+

@@ -1,4 +1,5 @@
 import httpRequester from '../utils/http-requester.js';
+import Handlebars from '../../bower_components/handlebars/handlebars.js';
 
 var TRIPS_URL = '../app/data/sampleTrips.json';
 var TRIPS_TEMPLATE = 'app/templates/trips.handlebars';

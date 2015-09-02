@@ -1,7 +1,10 @@
 import identity from '../services/identity.js';
 
 function init() {
-    if (identity.getCurrentUser()) {
+    var currentUser = identity.getCurrentUser();
+
+    if (currentUser) {
+        $('#user-name-logged').html('Hello, ' + usernameToProperCase(currentUser));
         $('.authorized').show();
         $('.unauthorized').hide();
     } else {
@@ -11,6 +14,10 @@ function init() {
 
     $('#main-content').load('app/views/homeView.html');
 
+}
+
+function usernameToProperCase(username){
+    return username.charAt(0).toUpperCase() + username.substr(1).toLowerCase()
 }
 
 export default {

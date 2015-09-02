@@ -110,3 +110,12 @@ nav {
     display: none;
 }
 
+.trips-view-container{
+    margin-bottom: 5px;
+}
+
+.trip-details{
+    margin-top: 3px;
+    margin-bottom: 0;
+    display: none;
+}

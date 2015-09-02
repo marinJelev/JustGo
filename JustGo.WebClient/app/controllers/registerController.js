@@ -1,14 +1,14 @@
 import identity from '../services/identity.js';
 import notifier from '../utils/notifier.js';
 import users from '../data/users.js';
+import CryptoJS from '../../node_modules/crypto-js/crypto-js.js';
 
 var USERNAME_MIN_VALID_LENGTH = 3,
     PASSWORD_MIN_VALID_LENGTH = 5,
-    EMAIL_MIN_VALID_LENGTH = 7,
     REGISTRATION_SUCCESS_MESSAGE = 'Registration successful!',
     INVALID_USERNAME_MESSAGE = 'Username should be minimum ' + USERNAME_MIN_VALID_LENGTH + ' letters long!',
     INVALID_PASSWORD_MESSAGE = 'Password should be minimum ' + PASSWORD_MIN_VALID_LENGTH + ' letters long!',
-    INVALID_EMAIL_MESSAGE = 'Email should be minimum ' + EMAIL_MIN_VALID_LENGTH + ' characters long!',
+    INVALID_EMAIL = 'The email address is not valid!',
     PASSWORDS_DONT_MATCH_MESSAGE = "Passwords don't match!";
 
 function init() {
@@ -25,7 +25,7 @@ function bindEvents(argument) {
         $resetButton = $('#reset-button'),
         $submitButton = $('#submit-button');
 
-    $resetButton.on('click', function() {
+    $resetButton.on('click', function () {
         $registrationForm.trigger('reset');
     });
 
@@ -39,35 +39,40 @@ function handleRegistrationLogic() {
         lastName = $('#lastName').val(),
         email = $('#inputEmail').val(),
         password = $('#inputPassword').val(),
-        retypedPassword = $('#retypePassword').val();
+        retypedPassword = $('#retypePassword').val(),
+        encryptedPassword = CryptoJS.SHA256(password).toString();
 
     if (!isValidUsername(username)) {
         notifier.alertError(INVALID_USERNAME_MESSAGE);
+        return;
     }
     if (!isValidEmail(email)) {
-        notifier.alertError(INVALID_EMAIL_MESSAGE);
+        notifier.alertError(INVALID_EMAIL);
+        return;
     }
     if (!isValidPassword(password)) {
         notifier.alertError(INVALID_PASSWORD_MESSAGE);
+        return;
     }
 
     if (!arePasswordsEqual(password, retypedPassword)) {
         notifier.alertError(PASSWORDS_DONT_MATCH_MESSAGE);
+        return;
     }
 
     currentUser.username = username;
     currentUser.firstName = firstName;
     currentUser.lastName = lastName;
     currentUser.email = email;
-    currentUser.password = password;
+    currentUser.password = encryptedPassword;
 
     users
         .create(currentUser)
-        .then(function(user) {
+        .then(function (user) {
             notifier.alertSuccess(REGISTRATION_SUCCESS_MESSAGE);
             routie('/login');
         })
-        .catch(function(err) {
+        .catch(function (err) {
             notifier.alertError(err);
         });
 }
@@ -77,7 +82,8 @@ function isValidUsername(username) {
 }
 
 function isValidEmail(email) {
-    return email.length >= EMAIL_MIN_VALID_LENGTH;
+    var re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+    return re.test(email);
 }
 
 function isValidPassword(password) {

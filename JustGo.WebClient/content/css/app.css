@@ -14,18 +14,18 @@ nav {
     margin-right: auto;
 }
 
-.navbar{
+.navbar {
     z-index: 10;
 }
 
-.navbar-header img{
+.navbar-header img {
     border-radius: 10px;
     height: 30px;
     padding: 0;
     width: 100px;
 }
 
-.footer{
+.footer {
     position: fixed;
     bottom: 0;
     height: 50px;
@@ -48,7 +48,7 @@ nav {
     position: absolute !important;
 }
 
-#globe-view .we-pp-wrapper{
+#globe-view .we-pp-wrapper {
     border-radius: 0;
     color: darkslategrey;
 }
@@ -59,10 +59,11 @@ nav {
     right: 10px;
 }
 
-#globe-view #globe-buttons{
+#globe-view #globe-buttons {
     position: absolute;
     margin-left: 17%;
 }
+
 /*end of globe*/
 
 /*google maps search input*/
@@ -98,6 +99,7 @@ nav {
     font-size: 13px;
     font-weight: 300;
 }
+
 /*end of google maps search input*/
 
 .alert-pesho {
@@ -110,24 +112,31 @@ nav {
     display: none;
 }
 
-.trips-view-container{
+.trips-view-container {
     margin-bottom: 5px;
 }
 
-.trip-details{
+.trip-details {
     margin-top: 3px;
     margin-bottom: 0;
     display: none;
 }
 
-.place-container{
+.place-details {
     margin-bottom: 6px !important;
+    border-radius: 4px 4px 4px 4px;
+    display: none;
 }
 
-.place-inner-div{
+.place-container {
+    margin-bottom: 6px !important;
+    border-radius: 4px 4px 4px 4px;
+}
+
+.place-inner-div {
     margin-top: 6px;
 }
 
-.place-info-inner{
+.place-info-inner {
     padding-left: 10px;
 }

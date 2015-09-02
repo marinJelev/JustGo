@@ -6,7 +6,8 @@
                 <span class="text-success place-info-inner">State: {{this.state}}</span>
                 <span class="text-info place-info-inner">City: {{this.city}}</span>
             </div>
-            <a href="#" class="btn btn-primary btn-sm pull-right">Place details</a>
+            <a class="btn btn-primary btn-sm pull-right" id="detailsID-{{this._id}}">Place details</a>
         </div>
+        <div class="col-md-12 list-group-item place-details" id="{{this._id}}">Map here</div>
     </div>
 {{/each}}

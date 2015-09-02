@@ -32,4 +32,11 @@ function visualizeUserPlacesData(placesData) {
     });
 }
 
+$TEMPLATE_TARGET.on("click", "a", function (ev) {
+    var divID = '#' + ev.target.id.split('-')[1];
+    console.log('mode details clicked');
+    console.log(divID);
+    $(divID).toggle("slow");
+});
+
 export default {init}

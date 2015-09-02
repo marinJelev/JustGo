@@ -1,0 +1,16 @@
+{{#each this}}
+<div class="col-md-12">
+    <div class="row">
+        <div class="col-md-10">
+            <ul class="breadcrumb">
+                <li>Country: {{this.country}}</li>
+                <li>State: {{this.state}}</li>
+                <li>City: {{this.city}}</li>
+            </ul>
+        </div>
+        <div class="col-md-2">
+            <a href="#" class="btn btn-primary btn-sm">Place details</a>
+        </div>
+    </div>
+</div>
+{{/each}}

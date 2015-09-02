@@ -1,7 +1,8 @@
 import httpRequester from '../utils/http-requester.js';
 
 var TRIPS_URL = '../app/data/sampleTrips.json';
-var TRIPS_TEMPLATE = 'app/views/tripsView.html';
+var TRIPS_TEMPLATE = 'app/templates/trips.handlebars';
+var TRIPS_VIEW = 'app/views/tripsView.html';
 var $TEMPLATE_TARGET = $('#main-content');
 
 function init() {
@@ -11,6 +12,7 @@ function init() {
             .get(TRIPS_URL, ' ')
             .then(function(data) {
                 visualizeUserTripsData(data);
+                resolve();
             });
     });
 
@@ -20,7 +22,13 @@ function init() {
 function visualizeUserTripsData(tripsData){
     $.get(TRIPS_TEMPLATE, function (templateData) {
         var tripsTemplate = Handlebars.compile(templateData);
-        $TEMPLATE_TARGET.html(tripsTemplate(tripsData));
+        var promise = new Promise(function (resolve, reject) {
+            $.get(TRIPS_VIEW, function (data) {
+                $TEMPLATE_TARGET.html(data + tripsTemplate(tripsData));
+            });
+            resolve();
+        })
+        //$TEMPLATE_TARGET.html(tripsTemplate(tripsData));
     });
 
     $TEMPLATE_TARGET.on("click", "button", function (ev) {

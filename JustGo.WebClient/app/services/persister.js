@@ -9,7 +9,7 @@ var saveTripUrl =  API_URL + '',
     savePlaceUrl = API_URL + 'places',
     getTripsUrl = API_URL + '',
     GetPlaceUrl = API_URL + '',
-    token = identity.getToken;
+    token = identity.getToken();
 
 
 function getCityByGeoLocation(lat, lang) {
@@ -40,7 +40,7 @@ function getAllCountry() {
 function savePlace(place) {
     var promise = new Promise(function (resolve, reject) {
         httpRequester
-            .post(savePlaceUrl, place, true)
+            .post(savePlaceUrl, place, true, token)
             .then(function (data) {
                 resolve(data);
             });

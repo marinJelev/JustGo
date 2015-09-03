@@ -1,7 +1,6 @@
 import globe from 'utils/globe.js';
 import persister from '../services/persister.js';
 import templateGenerator from 'utils/templateGenerator.js';
-import identity from '../services/identity.js';
 
 var URL = {
     POPUP: 'app/views/globePopUp.html',
@@ -93,7 +92,6 @@ $wrapper.on('click', '.save-place', function () {
     var index = $parentLi.attr('data-id') - 1;
 
     var place = places[index];
-    place.createdBy = identity.getCurrentUser()
 
     persister
         .savePlace(place)

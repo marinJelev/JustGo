@@ -19,7 +19,6 @@ function bindEvents() {
         .get(TRIPS_URL)
         .then(function (data) {
             trips = data;
-            console.log(trips);
             templateGenerator
                 .get(TRIPS_TEMPLATE)
                 .then(function (template) {

@@ -10,7 +10,7 @@ function login(user) {
             .post(LOGIN_URL, user, true)
             .then(function(data) {
                 identity.setCurrentUser(data.user.username);
-                //set token
+                identity.setToken(data.user.accessToken);
                 resolve(data);
             });
     });

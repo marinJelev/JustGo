@@ -1,21 +1,19 @@
 function get(url, data, json, token) {
-    var headers = customHeaders(json, token);
-
-    return request('GET', url, data, headers);
+    return request('GET',  url, data,json, token);
 }
 
 function post(url, data, json, token) {
-    var headers = customHeaders(json, token);
-
-    return request('POST', url, data, headers);
+    return request('POST', url, data,json, token);
 }
 
-function request(type, url, data, headers) {
+function request(type, url, data, json, token) {
     var promise = new Promise(function(resolve, reject) {
         $.ajax({
             url: url,
             method: type,
-            headers: headers,
+            beforeSend: function (xhr) {
+                customHeaders(xhr, json, token)
+            },
             data: JSON.stringify(data),
             success: function(data) {
                 resolve(data);
@@ -29,14 +27,14 @@ function request(type, url, data, headers) {
     return promise;
 }
 
-function customHeaders(json, token){
+function customHeaders(xhr, json, token){
     var headers = {};
     if(json){
-      headers['contentType'] = 'application/json'
+        xhr.setRequestHeader('Content-Type', 'application/json');
     }
 
     if(token){
-        headers['X-Access-Token'] = token;
+        xhr.setRequestHeader('X-Access-Token', token);
     }
 
     return headers

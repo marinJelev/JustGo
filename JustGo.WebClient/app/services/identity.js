@@ -11,7 +11,7 @@ function getToken(){
 }
 
 function setToken(token){
-    localStorage.setItem('token', username);
+    localStorage.setItem('token', token);
 }
 
 export default {

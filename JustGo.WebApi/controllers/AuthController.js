@@ -51,7 +51,7 @@ module.exports = {
       });
   },
   authenticate: function(req, res, next) {
-    var token = req.headers['X-Access-Token'];
+    var token = req.headers['x-access-token'];
 
     users
       .findByToken(token)

@@ -7,7 +7,7 @@ module.exports = {
   development: {
     rootPath: rootPath,
     port: 3030,
-    dbConnection: 'mongodb://justgo:hemingwayspecial@ds041613.mongolab.com:41613/justgodevelopment'
+    dbConnection: 'mongodb://justgo:hemingwayspecial@ds041613.mongolab.com:41613/justgoproduction'
   },
   production: {
     rootPath: rootPath,

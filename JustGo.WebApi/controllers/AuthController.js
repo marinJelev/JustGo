@@ -35,7 +35,7 @@ module.exports = {
         }
 
         if (!dbUser.token) {
-          dbUser.token = randomToken(80);
+          dbUser.accessToken = randomToken(80);
           dbUser.save();
         }
 
@@ -43,7 +43,7 @@ module.exports = {
           success: true,
           user: {
             username: dbUser.username,
-            token: dbUser.token
+            accessToken: dbUser.accessToken
           }
         });
 
@@ -58,7 +58,7 @@ module.exports = {
     users
       .findByToken(token)
       .then(function(dbUser) {
-        req.user = dbUser.username;
+        req.user = dbUser;
         next();
       })
       .catch(function(err) {
@@ -71,7 +71,7 @@ module.exports = {
     var user = req.user;
 
     users
-      .findByUsername(user)
+      .findByUsername(user.username)
       .then(function(dbUser) {
         dbUser.token = '';
         dbUser.save();

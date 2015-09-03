@@ -9,12 +9,14 @@ module.exports = {
 
     places.create(place, function(err, place) {
       if (err) {
-        res.status(400);
-        res.json({ success: false, reason: err });
+        res
+          .status(401)
+          .json({ success: false, reason: err });
       }
 
-      res.status(200);
-      res.json(place);
+      res
+        .status(200)
+        .json({ success: true, place: place });
     });
   }
 };

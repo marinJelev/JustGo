@@ -8,7 +8,6 @@ module.exports = {
     var promise = new Promise(function(resolve, reject) {
       User.create(user, function(err, dbUser) {
         if (err) {
-          console.log(err)
           if (err.code === 11000) {
             reject('Username has already been taken!');
           } else {
@@ -45,7 +44,7 @@ module.exports = {
   },
   findByToken: function (token) {
     var promise = new Promise(function(resolve, reject) {
-      User.findOne({ token: token }).exec(function (err, dbUser) {
+      User.findOne({ accessToken: token }).exec(function (err, dbUser) {
         if (err) {
           reject(err);
         }

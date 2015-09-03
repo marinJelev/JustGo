@@ -23,7 +23,8 @@ class TemplateGenerator {
 
     compile(url) {
         var promise = new Promise(function (resolve, reject) {
-            $.get(url)
+            httpRequester
+                .get(url, false, false)
                 .then(function (data) {
                     var template = Handlebars.compile(data);
                     return template

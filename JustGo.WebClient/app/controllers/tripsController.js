@@ -34,7 +34,6 @@ function bindEvents() {
 $TEMPLATE_TARGET.on("click", "button", function (ev) {
     var id = ev.target.id.split('-')[1];
     var divID = '#' + id;
-    
     $(divID).toggle("slow");
     map.calculateAndDisplayRoute(trips[id -1])
 });

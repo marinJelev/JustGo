@@ -1,15 +1,23 @@
 import httpRequester from 'utils/http-requester.js'
+import identity from './identity.js';
 
-var GOOGLE_MAPS_URL = "http://maps.googleapis.com/maps/api/geocode/json?latlng=",
-    SAVE_TRIP = '',
-    SAVE_PLACE = 'http://localhost:3030/places',
-    GET_TRIPS = '',
-    GET_PLACES = '';
+var GOOGLE_MAPS_URL = "http://maps.googleapis.com/maps/api/geocode/json?latlng=";
+var API_URL = 'http://localhost:3030/';
+var ALL_COUNTRY_URL = 'app/data/country.json';
+
+var saveTripUrl =  API_URL + '',
+    savePlaceUrl = API_URL + 'places',
+    getTripsUrl = API_URL + '',
+    GetPlaceUrl = API_URL + '',
+    token = identity.getToken;
+
 
 function getCityByGeoLocation(lat, lang) {
     var url = GOOGLE_MAPS_URL + lat + ',' + lang + '&sensor=true';
-    var promise = new Promise(function(resolve, reject) {
-        $.get(url, function(data) {
+    var promise = new Promise(function (resolve, reject) {
+        httpRequester
+            .get(url, false, false)
+            .then(function (data) {
                 resolve(data);
             });
     });
@@ -18,11 +26,10 @@ function getCityByGeoLocation(lat, lang) {
 }
 
 function getAllCountry() {
-    var url = 'app/data/country.json';
-    var promise = new Promise(function(resolve, reject) {
+    var promise = new Promise(function (resolve, reject) {
         httpRequester
-            .get(url)
-            .then(function(data) {
+            .get(ALL_COUNTRY_URL, false, true)
+            .then(function (data) {
                 resolve(data);
             });
     });
@@ -31,10 +38,10 @@ function getAllCountry() {
 }
 
 function savePlace(place) {
-    var promise = new Promise(function(resolve, reject) {
+    var promise = new Promise(function (resolve, reject) {
         httpRequester
-            .post(SAVE_PLACE, place)
-            .then(function(data) {
+            .post(savePlaceUrl, place, true)
+            .then(function (data) {
                 resolve(data);
             });
     });
@@ -43,10 +50,10 @@ function savePlace(place) {
 }
 
 function saveTrip(trip) {
-    var promise = new Promise(function(resolve, reject) {
+    var promise = new Promise(function (resolve, reject) {
         httpRequester
-            .post(SAVE_TRIP, trip)
-            .then(function(data) {
+            .post(saveTripUrl, trip, true, token)
+            .then(function (data) {
                 resolve(data);
             });
     });

@@ -8,6 +8,7 @@ module.exports = {
     var promise = new Promise(function(resolve, reject) {
       User.create(user, function(err, dbUser) {
         if (err) {
+          console.log(err)
           if (err.code === 11000) {
             reject('Username has already been taken!');
           } else {

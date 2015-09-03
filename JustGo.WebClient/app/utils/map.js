@@ -27,8 +27,7 @@ function calculateAndDisplayRoute(trip) {
     //    };
     //  //  return new google.maps.LatLng(location.lat, location.long);
     //});
-    console.log(locationFrom)
-    console.log( wayPoints)
+   
     map.panTo(locationFrom);
 
     directionsService.route({

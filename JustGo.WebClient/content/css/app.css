@@ -103,12 +103,12 @@ nav {
 /*end of google maps search input*/
 
  /*google maps*/
-#map {
+#trips-view #map {
     margin-top: 15px;
     height: 400px;
 }
 
-#panel {
+#trips-view #panel {
     position: absolute;
     top: 10px;
     left: 25%;
@@ -119,21 +119,21 @@ nav {
     text-align: center;
 }
 
-#panel, .panel {
+#trips-view #panel, .panel {
     font-family: 'Roboto','sans-serif';
     line-height: 30px;
     padding-left: 10px;
 }
 
-#panel select, #panel input, .panel select, .panel input {
+#trips-view #panel select, #panel input, .panel select, .panel input {
     font-size: 15px;
 }
 
-#panel select, .panel select {
+#trips-view #panel select, .panel select {
     width: 100%;
 }
 
-#panel i, .panel i {
+#trips-view #panel i, .panel i {
     font-size: 12px;
 }
 /*end google maps*/

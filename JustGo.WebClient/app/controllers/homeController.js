@@ -16,7 +16,9 @@ function init() {
 }
 
 function bindEvents() {
-    $('.carousel .item').each(function () {
+    var $carouselItem = $('.carousel .item');
+    
+        $carouselItem.each(function () {
         var next = $(this).next();
         if (!next.length) {
             next = $(this).siblings(':first');
@@ -39,6 +41,7 @@ function bindEvents() {
         $(this).css("transform", "scale(1)");
     });
 }
+
 function usernameToProperCase(username){
     return username.charAt(0).toUpperCase() + username.substr(1).toLowerCase()
 }

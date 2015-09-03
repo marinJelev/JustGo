@@ -23,7 +23,7 @@ module.exports = {
   },
    getAll: function(username) {
     var promise = new Promise(function(resolve, reject) {
-      Trips.find({ createdBy: username }, function(err, dbTrips) {
+      Trip.find({ createdBy: username }, function(err, dbTrips) {
         if (err) {
           reject(err);
         }

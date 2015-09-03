@@ -19,5 +19,19 @@ module.exports = {
           .status(401)
           .json({ success: false, reason: err });
       });
+  },
+  getAll: function(req, res) {
+    var user = req.user;
+
+    trips
+      .getAll(user.username)
+      .then(function(dbTrips) {
+        res
+          .status(200)
+          .json({ success: true, trips: dbTrips });
+      })
+      .catch(function(err) {
+        res.json({ success: false, reason: err});
+      });
   }
 };

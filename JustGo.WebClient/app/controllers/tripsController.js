@@ -1,10 +1,9 @@
-import httpRequester from '../utils/http-requester.js';
+import persister from '../services/persister.js';
 import Handlebars from '../../bower_components/handlebars/handlebars.js';
 import templateGenerator from 'utils/templateGenerator.js';
 import map from 'utils/map.js';
 
-var TRIPS_URL = '../app/data/sampleTrips.json';
-var TRIPS_TEMPLATE = 'app/view/trips.html';
+var TRIPS_TEMPLATE = 'app/views/trips.html';
 var $TEMPLATE_TARGET = $('#main-content');
 var trips = [];
 var $tripsContainer;
@@ -16,8 +15,8 @@ function init() {
 
 function bindEvents() {
     $tripsContainer = $('#trips-container');
-    httpRequester
-        .get(TRIPS_URL)
+    persister
+        .getTrips()
         .then(function (data) {
             trips = data;
             templateGenerator

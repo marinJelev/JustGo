@@ -50,7 +50,7 @@ function savePlace(place) {
 function getPlaces() {
     var promise = new Promise(function (resolve, reject) {
         httpRequester
-            .get(placeUrl, true, true)
+            .get(placeUrl, false,  true, token)
             .then(function (data) {
                 resolve(data);
             });
@@ -74,7 +74,7 @@ function saveTrip(trip) {
 function getTrips() {
     var promise = new Promise(function (resolve, reject) {
         httpRequester
-            .get(tripsUrl, true, true)
+            .get(tripsUrl, false, true, token)
             .then(function (data) {
                 resolve(data);
             })

@@ -7,8 +7,8 @@
  - url: http://api.justgo.herokuapp.com/users [ http://localhost:3030/users ]
  - method: POST
  - body : {
-            username: "batman",
-            password: "c79e32c27a1f1241f0da218d57bf15ea9e09e7dc"
+            "username": "batman",
+            "password": "c79e32c27a1f1241f0da218d57bf15ea9e09e7dc"
           }
 ```
 
@@ -17,10 +17,10 @@
 
 ```javascript
 body: {
-        succsess: true,
-        user: {
-          id: "55e82ab4d45e1d4846464557",
-          username: "batman"
+        "succsess": true,
+        "user": {
+          "id": "55e82ab4d45e1d4846464557",
+          "username": "batman"
         }
       }
 ```
@@ -30,7 +30,7 @@ body: {
 ```javascript
 body: {
         "succsess": false,
-        "reason": {...}
+        "reason": "..."
       }
 ```
 
@@ -52,7 +52,10 @@ body: {
 ```javascript
 body: {
         "succsess": true,
-        "user": { "username": "batman" }
+        "user": {
+          "username": "batman",
+          "accessToken": "o9xkb4e2vcwypyif8bz6agvu9s9yp6fx5dueci01dvsz1xmvd4ueise7z7r52se3r4rrb69jd8r439ue"
+        }
       }
 ```
 
@@ -60,14 +63,8 @@ body: {
 
 ```javascript
 body: {
-        "readyState": 4,
-        "responseText": "{\"success\":false,\"reason\":\"Incorrect username or password!\"}",
-        "responseJSON": {
-            "success": false,
-            "reason": "Incorrect username or password!"
-        },
-        "status": 401,
-        "statusText": "Unauthorized"
+        "succsess": false,
+        "reason": "..."
       }
 ```
 
@@ -77,11 +74,21 @@ body: {
 ```javascript
  - url: http://api.justgo.herokuapp.com/logout [ http://localhost:3030/logout ]
  - method: POST
- - body : __empty__
+ - header: { "X-Access-Token": "o9xkb4e2vcwypyif8bz6agvu9s9yp6fx5dueci01dvsz1xmvd4ueise7z7r52se3r4rrb69jd8r439ue" }
+ - body : empty
 ```
 
 #### Response
+ - **In case of success:**
 
 ```javascript
 body: { "succsess": true }
+```
+
+ - **In case of an error:**
+ ```javascript
+body: {
+        "succsess": false,
+        "reason": "..."
+      }
 ```

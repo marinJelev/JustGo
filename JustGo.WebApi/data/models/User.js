@@ -1,19 +1,18 @@
 'use strict';
 
 var mongoose = require('mongoose');
+var bcrypt = require('bcrypt');
 
 module.exports.init = function() {
   var userSchema = mongoose.Schema({
     username: { type: String, required: true, unique: true },
     password: { type: String, required: true },
-    email: { type: String, required: true, unique: true }
+    token: { type: String }
   });
 
-  userSchema.method({
-    isValidPassword: function(password) {
-      return password === this.password;
-    }
-  });
+  userSchema.methods.hasValidPassword = function(password) {
+    return bcrypt.compareSync(password, this.password);
+  };
 
   mongoose.model('User', userSchema);
 };

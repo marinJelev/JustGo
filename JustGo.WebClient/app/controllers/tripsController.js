@@ -4,7 +4,7 @@ import templateGenerator from 'utils/templateGenerator.js';
 import map from 'utils/map.js';
 
 var TRIPS_URL = '../app/data/sampleTrips.json';
-var TRIPS_TEMPLATE = 'app/templates/trips.handlebars';
+var TRIPS_TEMPLATE = 'app/view/trips.html';
 var $TEMPLATE_TARGET = $('#main-content');
 var trips = [];
 var $tripsContainer;

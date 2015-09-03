@@ -1,21 +1,21 @@
 'use strict';
 
-var Place = require('mongoose').model('Place');
+var Trip = require('mongoose').model('Trip');
 var Promise = require('bluebird');
 
 module.exports = {
-  create: function(place) {
+  create: function(trip) {
     var promise = new Promise(function(resolve, reject) {
-      Place.create(place, function(err, dbPlace) {
+      Trip.create(trip, function(err, dbTrip) {
         if (err) {
           reject(err);
         }
 
-        if (!dbPlace) {
-          reject('Place could not be saved in database!');
+        if (!dbTrip) {
+          reject('Trip could not be saved in database!');
         }
 
-        resolve(dbPlace);
+        resolve(dbTrip);
       });
     });
 

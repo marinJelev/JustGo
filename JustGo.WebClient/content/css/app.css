@@ -3,10 +3,6 @@ html, body {
     margin: 0;
 }
 
-.carousel-inner, .carousel-inner .item img {
-    border-radius: 15px;
-}
-
 nav {
     width: 100%;
     display: block;
@@ -29,7 +25,7 @@ nav {
     position: fixed;
     bottom: 0;
     height: 50px;
-    background-color: #00adee;
+    background-color: #375a7f;
     width: 100%;
     display: block;
 }
@@ -138,6 +134,17 @@ nav {
 }
 /*end google maps*/
 
+/*home view*/
+.carousel-inner, .carousel-inner .item img {
+    border-radius: 15px;
+}
+
+.home-buttons {
+    border: 5px solid white;
+    border-radius: 15px;
+}
+/*end of home view*/
+
 .alert-pesho {
     position: absolute;
     right: 20px;
@@ -176,3 +183,4 @@ nav {
 .place-info-inner {
     padding-left: 10px;
 }
+

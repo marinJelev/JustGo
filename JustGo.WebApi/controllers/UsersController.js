@@ -25,7 +25,7 @@ module.exports = {
 
     var salt = bcrypt.genSaltSync(10);
     user.password = bcrypt.hashSync(user.password, salt);
-    user.token = '';
+    user.accessToken = '';
 
     users
       .create(user)
@@ -37,16 +37,6 @@ module.exports = {
             id: dbUser._id
           }
         });
-      })
-      .catch(function(err) {
-        res.json({ success: false, reason: err });
-      });
-  },
-  _all: function(req, res) {
-    users
-      ._all()
-      .then(function(dbUsers) {
-        res.json({ success: true, users: dbUsers });
       })
       .catch(function(err) {
         res.json({ success: false, reason: err });

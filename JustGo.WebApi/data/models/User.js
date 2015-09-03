@@ -7,7 +7,7 @@ module.exports.init = function() {
   var userSchema = mongoose.Schema({
     username: { type: String, required: true, unique: true },
     password: { type: String, required: true },
-    token: { type: String }
+    accessToken: { type: String }
   });
 
   userSchema.methods.hasValidPassword = function(password) {

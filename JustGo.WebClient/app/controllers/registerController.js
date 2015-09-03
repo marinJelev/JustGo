@@ -35,9 +35,6 @@ function bindEvents(argument) {
 function handleRegistrationLogic() {
     var currentUser = {},
         username = $('#inputUsername').val(),
-        firstName = $('#firstName').val(),
-        lastName = $('#lastName').val(),
-        email = $('#inputEmail').val(),
         password = $('#inputPassword').val(),
         retypedPassword = $('#retypePassword').val(),
         encryptedPassword = CryptoJS.SHA256(password).toString();
@@ -46,10 +43,7 @@ function handleRegistrationLogic() {
         notifier.alertError(INVALID_USERNAME_MESSAGE);
         return;
     }
-    if (!isValidEmail(email)) {
-        notifier.alertError(INVALID_EMAIL);
-        return;
-    }
+
     if (!isValidPassword(password)) {
         notifier.alertError(INVALID_PASSWORD_MESSAGE);
         return;
@@ -61,29 +55,23 @@ function handleRegistrationLogic() {
     }
 
     currentUser.username = username;
-    currentUser.firstName = firstName;
-    currentUser.lastName = lastName;
-    currentUser.email = email;
     currentUser.password = encryptedPassword;
 
     users
         .create(currentUser)
         .then(function (user) {
+            console.log('SUCCESS');
             notifier.alertSuccess(REGISTRATION_SUCCESS_MESSAGE);
             routie('/login');
         })
         .catch(function (err) {
+            console.log('ERROR');
             notifier.alertError(err);
         });
 }
 
 function isValidUsername(username) {
     return username.length >= USERNAME_MIN_VALID_LENGTH;
-}
-
-function isValidEmail(email) {
-    var re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
-    return re.test(email);
 }
 
 function isValidPassword(password) {

@@ -9,9 +9,22 @@ function login(user) {
         httpRequester
             .post(LOGIN_URL, user, true)
             .then(function(data) {
+                if (!data.success) {
+                    reject(data.reason);
+                }
+
                 identity.setCurrentUser(data.user.username);
                 identity.setToken(data.user.accessToken);
                 resolve(data);
+            })
+            .catch(function(err) {
+                console.log(err);
+
+                if (!err.reason) {
+                    reject(err);
+                }
+
+                reject(err.reason);
             });
     });
 
@@ -27,6 +40,9 @@ function logout() {
                 identity.setCurrentUser('');
                 identity.setToken('');
                 resolve();
+            })
+            .catch(function(err) {
+                reject(err);
             });
     });
 

@@ -20,5 +20,22 @@ module.exports = {
     });
 
     return promise;
+  },
+  getAll: function(username) {
+    var promise = new Promise(function(resolve, reject) {
+      Place.find({ createdBy: username }, function(err, dbPlaces) {
+        if (err) {
+          reject(err);
+        }
+
+        if (!dbPlaces) {
+          reject('Places could not be saved in database!');
+        }
+
+        resolve(dbPlaces);
+      });
+    });
+
+    return promise;
   }
 };

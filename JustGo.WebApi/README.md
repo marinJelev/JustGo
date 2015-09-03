@@ -7,9 +7,8 @@
  - url: http://api.justgo.herokuapp.com/users [ http://localhost:3030/users ]
  - method: POST
  - body : {
-            "username": "batman",
-            "password": "c79e32c27a1f1241f0da218d57bf15ea9e09e7dc",
-            "email": "batman@batman.com"
+            username: "batman",
+            password: "c79e32c27a1f1241f0da218d57bf15ea9e09e7dc"
           }
 ```
 
@@ -18,8 +17,9 @@
 
 ```javascript
 body: {
-        "succsess": true,
-        "user": {
+        succsess: true,
+        user: {
+          id: "55e82ab4d45e1d4846464557",
           username: "batman"
         }
       }

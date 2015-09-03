@@ -1,46 +1,86 @@
 'use strict';
 
-var passport = require('passport');
+var users = require('../data/users');
+var randomToken = require('random-token');
 
 module.exports = {
-  login: function(req, res, next) {
-    var auth = passport.authenticate('local', function(err, user) {
-      if (err) {
-        return next(err);
-      }
+  login: function(req, res) {
+    var user = req.body;
 
-      if (!user) {
-        res.status(401);
-        res.json({ success: false, reason: 'Incorrect username or password!'});
-      }
+    if (!user.username) {
+      res
+        .status(401)
+        .json({ success: false, reason: 'Username is required!'});
 
-      req.login(user, function(err) {
-        if (err) {
-          return next(err);
+      return;
+    }
+
+    if (!user.password) {
+      res
+        .status(401)
+        .json({ success: false, reason: 'Pasword is required!'});
+
+      return;
+    }
+
+    users
+      .findByUsername(user.username)
+      .then(function (dbUser) {
+        if (!(dbUser.hasValidPassword(user.password))) {
+          res
+            .status(401)
+            .json({ success: false, reason: 'Invalid password!'});
+
+          return;
         }
 
-        res.status(200);
+        if (!dbUser.token) {
+          dbUser.accessToken = randomToken(80);
+          dbUser.save();
+        }
+
         res.json({
           success: true,
           user: {
-            username: user.username
+            username: dbUser.username,
+            accessToken: dbUser.accessToken
           }
         });
-      });
-    });
 
-    auth(req, res, next);
+      })
+      .catch(function (err) {
+        res.json({ success: false, reason: err });
+      });
+  },
+  authenticate: function(req, res, next) {
+    var token = req.headers['X-Access-Token'];
+
+    users
+      .findByToken(token)
+      .then(function(dbUser) {
+        req.user = dbUser;
+        next();
+      })
+      .catch(function(err) {
+        res
+          .status(401)
+          .json({ success: false, reason: err });
+      });
   },
   logout: function(req, res) {
-    req.logout();
-    res.json({ success: true });
-  },
-  isAuthenticated: function(req, res, next) {
-    if (!req.isAuthenticated()) {
-      res.status(403);
-      res.end();
-    } else {
-      next();
-    }
+    var user = req.user;
+
+    users
+      .findByUsername(user.username)
+      .then(function(dbUser) {
+        dbUser.token = '';
+        dbUser.save();
+        res.json({ success: true });
+      })
+      .catch(function(err) {
+        res
+          .status(401)
+          .json({ success: false, reason: err });
+      });
   }
 };

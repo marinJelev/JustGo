@@ -60,10 +60,15 @@ nav {
     margin-left: 17%;
 }
 
+#globe-view #city {
+    font-size:10px;
+    color:#999
+}
+
 /*end of globe*/
 
 /*google maps search input*/
-#pac-input {
+#globe-view #pac-input {
     background-color: #fff;
     font-family: Roboto;
     font-size: 15px;
@@ -76,21 +81,21 @@ nav {
     margin-top: 40px;
 }
 
-#pac-input:focus {
+#globe-view #pac-input:focus {
     border-color: #4d90fe;
 }
 
-.pac-container {
+#globe-view .pac-container {
     font-family: Roboto;
 }
 
-#type-selector {
+#globe-view #type-selector {
     color: #fff;
     background-color: #4d90fe;
     padding: 5px 11px 0px 11px;
 }
 
-#type-selector label {
+#globe-view #type-selector label {
     font-family: Roboto;
     font-size: 13px;
     font-weight: 300;

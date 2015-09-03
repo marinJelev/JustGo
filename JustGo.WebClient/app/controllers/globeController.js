@@ -171,8 +171,11 @@ function addMarker(lat, long) {
         .getCityByGeoLocation(lat, long)
         .then(function (data) {
             countryData = data.results;
+            var countryDataLastIndex = countryData.length - 1;
             place = {
-                name: countryData[countryData.length - 2].formatted_address,
+                country: countryData[countryDataLastIndex].formatted_address,
+                state: countryData[countryDataLastIndex - 1].formatted_address,
+                name: countryData[countryDataLastIndex - 2].formatted_address,
                 latitude: lat,
                 longitude: long
             };
@@ -180,14 +183,7 @@ function addMarker(lat, long) {
             templateGenerator
                 .get(URL.POPUP)
                 .then(function (template) {
-                    var countryDataLastIndex = countryData.length - 1,
-                        templateObject = {
-                            Name: countryData[countryDataLastIndex].formatted_address,
-                            state: countryData[countryDataLastIndex - 1].formatted_address,
-                            city: countryData[countryDataLastIndex - 2].formatted_address
-                        };
-
-                    marker.bindPopup(template(templateObject), {maxWidth: 150, closeButton: true}).openPopup();
+                    marker.bindPopup(template(place), {maxWidth: 150, closeButton: true}).openPopup();
                 });
         });
 

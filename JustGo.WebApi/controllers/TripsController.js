@@ -1,18 +1,18 @@
 'use strict';
 
-var places = require('../data/places');
+var trips = require('../data/trips');
 
 module.exports = {
   create: function(req, res) {
-    var place = req.body;
-    place.createdBy = req.user.username;
+    var trip = req.body;
+    trip.createdBy = req.user.username;
 
-    places
-      .create(place)
-      .then(function(dbPlace) {
+    trips
+      .create(trip)
+      .then(function(dbTrip) {
         res
           .status(200)
-          .json({ success: true, place: dbPlace });
+          .json({ success: true, place: dbTrip });
       })
       .catch(function(err) {
         res

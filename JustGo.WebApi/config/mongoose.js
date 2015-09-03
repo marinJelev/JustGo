@@ -17,4 +17,5 @@ module.exports = function(config) {
 
   models.UserModel.init();
   models.PlaceModel.init();
+  models.TripModel.init();
 };

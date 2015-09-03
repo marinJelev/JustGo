@@ -16,6 +16,10 @@ module.exports = {
           }
         }
 
+        if (!dbUser) {
+          reject('User could not be saved in database!');
+        }
+
         resolve(dbUser);
       });
     });
@@ -55,18 +59,5 @@ module.exports = {
    });
 
    return promise;
-  },
-  _all: function() {
-    var promise = new Promise(function(resolve, reject) {
-      User.find({}, function(err, dbUsers) {
-        if (err) {
-          reject(err);
-        }
-
-        resolve(dbUsers);
-      });
-    });
-
-    return promise;
   }
 };

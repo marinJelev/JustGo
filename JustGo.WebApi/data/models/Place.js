@@ -7,6 +7,8 @@ module.exports.init = function() {
     latitude: { type: Number, required: true },
     longitude: { type: Number, required: true },
     name: { type: String, required: true },
+    state: { type: String, required: true },
+    country: { type: String, required: true },
     createdBy: { type: String, required: true }
   });
 

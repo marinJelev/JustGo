@@ -17,7 +17,7 @@ function init() {
 
 function bindEvents() {
     var $carouselItem = $('.carousel .item');
-    
+
         $carouselItem.each(function () {
         var next = $(this).next();
         if (!next.length) {

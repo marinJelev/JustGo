@@ -12,10 +12,33 @@ function init() {
         $('.unauthorized').show();
     }
 
-    $('#main-content').load('app/views/homeView.html');
-
+    $('#main-content').load('app/views/homeView.html', bindEvents);
 }
 
+function bindEvents() {
+    $('.carousel .item').each(function () {
+        var next = $(this).next();
+        if (!next.length) {
+            next = $(this).siblings(':first');
+        }
+        next.children(':first-child').clone().appendTo($(this));
+
+        for (var i = 0; i < 4; i++) {
+            next = next.next();
+            if (!next.length) {
+                next = $(this).siblings(':first');
+            }
+            next.children(':first-child').clone().appendTo($(this));
+        }
+    });
+    $(".home-buttons").hover(function () {
+        $(this).css("background-color", " #375a7f");
+        $(this).css("transform", "scale(1.5)");
+    }, function () {
+        $(this).css("background-color", "");
+        $(this).css("transform", "scale(1)");
+    });
+}
 function usernameToProperCase(username){
     return username.charAt(0).toUpperCase() + username.substr(1).toLowerCase()
 }

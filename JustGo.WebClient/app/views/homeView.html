@@ -11,8 +11,10 @@
         </div>
     </div>
 </div>
-
-
+<div class="col-md=12">
+    <h1 style="text-align: center">JustGo - a revolutionary travel mapper, which helps you plan and save your travelling
+        adventures.</h1>
+</div>
 <div class="carousel slide" id="myCarousel">
     <ol class="carousel-indicators">
         <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
@@ -24,50 +26,42 @@
     </ol>
     <div class="carousel-inner">
         <div class="item active">
-            <div class="col-md-2"><a href="#"><img src="./app/imgs/rio.jpg" class="img-responsive"></a></div>
+            <div class="col-md-2"><img src="./app/imgs/rio.jpg" class="img-responsive"></div>
         </div>
         <div class="item">
-            <div class="col-md-2"><a href="#"><img src="./app/imgs/iceland.jpg" class="img-responsive"></a></div>
+            <div class="col-md-2"><img src="./app/imgs/iceland.jpg" class="img-responsive"></div>
         </div>
         <div class="item">
-            <div class="col-md-2"><a href="#"><img src="./app/imgs/rio.jpg" class="img-responsive"></a></div>
+            <div class="col-md-2"><img src="./app/imgs/africa.jpg" class="img-responsive"></div>
         </div>
         <div class="item">
-            <div class="col-md-2"><a href="#"><img src="./app/imgs/paris.jpg" class="img-responsive"></a></div>
+            <div class="col-md-2"><img src="./app/imgs/paris.jpg" class="img-responsive"></div>
         </div>
         <div class="item">
-            <div class="col-md-2"><a href="#"><img src="./app/imgs/paris.jpg" class="img-responsive"></a></div>
+            <div class="col-md-2"><img src="./app/imgs/germany.jpg" class="img-responsive"></div>
         </div>
         <div class="item">
-            <div class="col-md-2"><a href="#"><img src="./app/imgs/NewYork.jpg" class="img-responsive"></a></div>
+            <div class="col-md-2"><img src="./app/imgs/NewYork.jpg" class="img-responsive"></div>
         </div>
     </div>
+    <br/><br/>
     <a class="left carousel-control" href="#myCarousel" data-slide="prev"><i
         class="glyphicon glyphicon-chevron-left"></i></a>
     <a class="right carousel-control" href="#myCarousel" data-slide="next"><i
         class="glyphicon glyphicon-chevron-right"></i></a>
 </div>
 
-<script>
-    $('#myCarousel').carousel({
-        interval: 4000
-    });
+<div class="col-md=10 col-md-offset-2" style="margin-top: 20px">
+    <div class="col-md-4"><a href="#/globe"><img src="./app/imgs/homeview/globe.png" class="img-responsive home-buttons"
+                                                 alt="globe"></a></div>
+    <div class="col-md-4"><a href="#/places"><img src="./app/imgs/homeview/myPlaces.png" class="img-responsive home-buttons"
+                                                  alt="myPlaces"></a></div>
+    <div class="col-md-4"><a href="#/trips"><img src="./app/imgs/homeview/myTrips.png" class="img-responsive home-buttons"
+                                                 alt="myTrips"></a></div>
+</div>
 
-    $('.carousel .item').each(function () {
-        var next = $(this).next();
-        if (!next.length) {
-            next = $(this).siblings(':first');
-        }
-        next.children(':first-child').clone().appendTo($(this));
-
-        for (var i = 0; i < 4; i++) {
-            next = next.next();
-            if (!next.length) {
-                next = $(this).siblings(':first');
-            }
-
-            next.children(':first-child').clone().appendTo($(this));
-        }
-    });
-</script>
-
+<blockquote class="img-responsive pull-right">
+    <br/>
+    <p><i>"The best travel mapper on the market!"</i></p>
+    <small><cite title="Source Title">Rolling Stones</cite></small>
+</blockquote>

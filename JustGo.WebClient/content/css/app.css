@@ -29,7 +29,7 @@ nav {
     position: fixed;
     bottom: 0;
     height: 50px;
-    background-color: #00adee;
+    background-color: #375a7f;
     width: 100%;
     display: block;
 }
@@ -175,4 +175,9 @@ nav {
 
 .place-info-inner {
     padding-left: 10px;
+}
+
+.home-buttons {
+    border: 5px solid white;
+    border-radius: 15px;
 }

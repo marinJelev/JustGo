@@ -5,7 +5,7 @@ import jsdom from '../node_modules/jsdom/lib/jsdom.js';
 
 var expect = chai.expect;
 
-describe('Project Tests', function () {
+describe('Notifier Tests', function () {
 
     before(function (done) {
         jsdom.env({
@@ -30,7 +30,7 @@ describe('Project Tests', function () {
         notifier.alertError("ERROR");
         expect(document.body.innerHTML).to.equal(html);
     });
-    
+
     it('Alerting SUCCESS through notifier should append a valid div to the html body', function () {
         document.body.innerHTML = '';
         var html = '<div class="alert alert-dismissible alert-pesho alert-success" style="opacity: 1;">SUCCESS</div>';

@@ -1,37 +1,25 @@
 import httpRequester from '../utils/http-requester.js';
-import Handlebars from '../../bower_components/handlebars/handlebars.js';
+import templateGenerator from 'utils/templateGenerator.js';
+import map from 'utils/map.js';
 
 var TRIPS_URL = '../app/data/samplePlaces.json';
-var PLACES_TEMPLATE = 'app/templates/places.handlebars';
 var PLACES_VIEW = 'app/views/placesView.html';
 var $TEMPLATE_TARGET = $('#main-content');
 var PLACES;
+
 function init() {
 
-    var promise = new Promise(function (resolve, reject) {
-        httpRequester
-            .get(TRIPS_URL, ' ')
-            .then(function (data) {
-                visualizeUserPlacesData(data);
-                PLACES = data;
-                resolve();
-            });
-    });
+    httpRequester
+        .get(TRIPS_URL, ' ')
+        .then(function (data) {
+            PLACES = data;
 
-    return promise;
-}
-
-
-function visualizeUserPlacesData(placesData) {
-    $.get(PLACES_TEMPLATE, function (templateData) {
-        var placesTemplate = Handlebars.compile(templateData);
-        var promise = new Promise(function (resolve, reject) {
-            $.get(PLACES_VIEW, function (data) {
-                $TEMPLATE_TARGET.html(data + placesTemplate(placesData));
-            });
-            resolve();
+            templateGenerator
+                .get(PLACES_VIEW)
+                .then(function (template) {
+                    $TEMPLATE_TARGET.html(template(data));
+                });
         })
-    });
 }
 
 function visualizeMap(placeID) {

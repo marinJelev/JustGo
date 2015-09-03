@@ -113,12 +113,16 @@ $wrapper.on('click', '.remove-place', function () {
 $wrapper.on('click', '#save-trip', function () {
     var trip = places.slice(),
         data = {
-            from: trip.splice(0, 1),
-            to: trip.splice(places.length - 1, 1),
+            from: trip.shift(),
+            to: trip.pop(),
             waypoints: trip
         };
-
-    //save to server;
+console.log(data);
+    persister
+        .savePlace(data)
+        .then(function (data) {
+            console.log(data);
+        });
 });
 
 $wrapper.on('click', '#remove-all', function () {

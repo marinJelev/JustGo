@@ -5,10 +5,8 @@ var GOOGLE_MAPS_URL = "http://maps.googleapis.com/maps/api/geocode/json?latlng="
 var API_URL = 'http://localhost:3030/';
 var ALL_COUNTRY_URL = 'app/data/country.json';
 
-var saveTripUrl =  API_URL + '',
-    savePlaceUrl = API_URL + 'places',
-    getTripsUrl = API_URL + '',
-    GetPlaceUrl = API_URL + '',
+var placeUrl = API_URL + 'places',
+    tripsUrl = API_URL + 'trips',
     token = identity.getToken();
 
 
@@ -40,7 +38,19 @@ function getAllCountry() {
 function savePlace(place) {
     var promise = new Promise(function (resolve, reject) {
         httpRequester
-            .post(savePlaceUrl, place, true, token)
+            .post(placeUrl, place, true, token)
+            .then(function (data) {
+                resolve(data);
+            });
+    });
+
+    return promise;
+}
+
+function getPlaces() {
+    var promise = new Promise(function (resolve, reject) {
+        httpRequester
+            .get(placeUrl, true, true)
             .then(function (data) {
                 resolve(data);
             });
@@ -52,10 +62,26 @@ function savePlace(place) {
 function saveTrip(trip) {
     var promise = new Promise(function (resolve, reject) {
         httpRequester
-            .post(saveTripUrl, trip, true, token)
+            .post(tripsUrl, trip, true, token)
             .then(function (data) {
                 resolve(data);
             });
+    });
+
+    return promise;
+}
+
+function getTrips() {
+    var promise = new Promise(function (resolve, reject) {
+        httpRequester
+            .get(tripsUrl, true, true)
+            .then(function (data) {
+                resolve(data);
+            })
+            .catch(function(err){
+                reject(err);
+            })
+
     });
 
     return promise;
@@ -65,6 +91,8 @@ export default {
     getCityByGeoLocation,
     getAllCountry,
     savePlace,
-    saveTrip
+    saveTrip,
+    getPlaces,
+    getTrips
 };
 // }(jQuery));

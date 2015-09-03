@@ -132,6 +132,16 @@ nav {
 #trips-view #panel i, .panel i {
     font-size: 12px;
 }
+
+#trips-view #directions-panel {
+    height: 200px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    border-radius: 5px;
+}
+#trips-view .adp, .adp table{
+    background-color: #FEFEFE;
+}
 /*end google maps*/
 
 /*home view*/

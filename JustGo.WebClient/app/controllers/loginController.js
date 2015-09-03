@@ -53,9 +53,12 @@ function handleUserLogin() {
 
     auth
         .login(currentUser)
-        .then(function(data) {
+        .then(function() {
             notifier.alertSuccess(LOGIN_SUCCESS_MESSAGE);
             routie('/home');
+        })
+        .catch(function(err) {
+            notifier.alertError(err);
         });
 }
 

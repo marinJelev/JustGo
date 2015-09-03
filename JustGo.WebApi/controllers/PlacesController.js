@@ -15,9 +15,21 @@ module.exports = {
           .json({ success: true, place: dbPlace });
       })
       .catch(function(err) {
+        res.json({ success: false, reason: err });
+      });
+  },
+  getAll: function(req, res) {
+    var user = req.user;
+
+    places
+      .getAll(user.username)
+      .then(function(dbPlaces) {
         res
-          .status(401)
-          .json({ success: false, reason: err });
+          .status(200)
+          .json({ success: true, places: dbPlaces });
+      })
+      .catch(function(err) {
+        res.json({ success: false, reason: err});
       });
   }
 };

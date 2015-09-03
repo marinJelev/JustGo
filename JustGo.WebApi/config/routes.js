@@ -9,5 +9,7 @@ module.exports = function(app) {
   app.post('/logout', controllers.auth.authenticate, controllers.auth.logout);
 
   app.post('/places', controllers.auth.authenticate, controllers.places.create);
+  app.get('/places', controllers.auth.authenticate, controllers.places.getAll);
+
   app.post('/trips', controllers.auth.authenticate, controllers.trips.create);
 };

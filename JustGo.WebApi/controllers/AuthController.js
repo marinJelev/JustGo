@@ -27,9 +27,7 @@ module.exports = {
       .findByUsername(user.username)
       .then(function (dbUser) {
         if (!(dbUser.hasValidPassword(user.password))) {
-          res
-            .status(401)
-            .json({ success: false, reason: 'Invalid password!'});
+          res.json({ success: false, reason: 'Invalid password!'});
 
           return;
         }

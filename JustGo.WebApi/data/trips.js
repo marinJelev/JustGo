@@ -20,5 +20,22 @@ module.exports = {
     });
 
     return promise;
+  },
+   getAll: function(username) {
+    var promise = new Promise(function(resolve, reject) {
+      Trips.find({ createdBy: username }, function(err, dbTrips) {
+        if (err) {
+          reject(err);
+        }
+
+        if (!dbTrips) {
+          reject('Trips could not be loaded in database!');
+        }
+
+        resolve(dbTrips);
+      });
+    });
+
+    return promise;
   }
 };

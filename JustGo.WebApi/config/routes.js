@@ -12,4 +12,5 @@ module.exports = function(app) {
   app.get('/places', controllers.auth.authenticate, controllers.places.getAll);
 
   app.post('/trips', controllers.auth.authenticate, controllers.trips.create);
+  app.get('/trips', controllers.auth.authenticate, controllers.trips.getAll);
 };

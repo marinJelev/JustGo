@@ -16,7 +16,7 @@ For the non-registered users, it features a stunning slider collection of the mo
 * My trips
 * Globe
 
-<a href="http://tinypic.com?ref=2uh91m9" target="_blank"><img src="http://i61.tinypic.com/2uh91m9.jpg" border="0" alt="Image and video hosting by TinyPic"></a>
+<a href="http://tinypic.com?ref=e96ykh" target="_blank"><img src="http://i61.tinypic.com/e96ykh.jpg" border="0" alt="Image and video hosting by TinyPic"></a>
 
 Registration is free and will always be free! It requires only a unique username and password and you are good to go.
 

@@ -1,7 +1,7 @@
 import identity from '../services/identity.js';
 import notifier from '../utils/notifier.js';
 import users from '../data/users.js';
-import template from '../utils/templateGenerator.js';
+//import template from '../utils/templateGenerator.js';
 import crypto from '../../node_modules/crypto-js/crypto-js.js';
 
 var USERNAME_MIN_VALID_LENGTH = 3,
@@ -19,14 +19,19 @@ function init() {
         return;
     }
 
-    template
-        .get(TEMPLATE_URL)
-        .then(function(template) {
-            $('#main-content').html(template());
-        })
-        .then(function() {
-            bindEvents();
-        });
+    // Breaks unit test due to handlebars
+    // import template is DISABLED
+    //
+    //    .get(TEMPLATE_URL)
+    //    .then(function(template) {
+    //        $('#main-content').html(template());
+    //    })
+    //    .then(function() {
+    //        bindEvents();
+    //    });
+
+    // Use old instead
+    $('#main-content').load('app/views/registerView.html', bindEvents);
 }
 
 function bindEvents(argument) {

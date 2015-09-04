@@ -4,7 +4,7 @@ import templateGenerator from 'utils/templateGenerator.js';
 import map from 'utils/map.js';
 
 var TRIPS_TEMPLATE = 'app/views/trips.html';
-var $TEMPLATE_TARGET = $('#main-content');
+var $templateTarget = $('#main-content');
 var trips = [];
 var $tripsContainer;
 var $directionPanel;
@@ -18,11 +18,12 @@ function bindEvents() {
     persister
         .getTrips()
         .then(function (data) {
-            trips = data;
+            trips = data.trips;
+
             templateGenerator
                 .get(TRIPS_TEMPLATE)
                 .then(function (template) {
-                    $tripsContainer.html(template(data));
+                    $tripsContainer.html(template(trips));
                 });
 
         });
@@ -32,7 +33,7 @@ function bindEvents() {
     $directionPanel.hide();
 }
 
-$TEMPLATE_TARGET.on('click', '#trips-view button', function (ev) {
+$templateTarget.on('click', '#trips-view button', function (ev) {
     var index = ev.target.id.split('-')[1];
     var divId = '#' + index;
     var $tripDetails = $(divId);
@@ -40,7 +41,8 @@ $TEMPLATE_TARGET.on('click', '#trips-view button', function (ev) {
     $tripDetails.toggle("slow")
         .first()
         .html($directionPanel);
-    map.calculateAndDisplayRoute(trips[index - 1])
+
+    map.calculateAndDisplayRoute(trips[index])
 });
 
 export default {init};

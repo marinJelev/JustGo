@@ -1,14 +1,14 @@
 {{#each this}}
 <div class="row trips-view-container" data-id="{{@index}}">
-    <div class="col-md-6 col-md-offset-3">
+    <div class="col-md-8 col-md-offset-2">
         <div class="input-group">
-            <span class="input-group-addon"><img src="app/imgs/icons/{{this.travelBy}}.svg" height="23" width="23"></span>
+            <span class="input-group-addon"><img src="app/imgs/icons/car.svg" height="23" width="23"></span>
             <div class="form-control">
-                From {{this.locationFrom.name}} to {{this.locationTo.name}}
+                From {{this.from.name}} to {{this.to.name}}
             </div>
-            <span class="input-group-btn"><button class="btn btn-default" id="button-{{this._id}}" type="button">Trip details</button></span>
+            <span class="input-group-btn"><button class="btn btn-default" id="button-{{@index}}" type="button">Trip details</button></span>
         </div>
-        <div class="panel panel-default trip-details" id="{{this._id}}">
+        <div class="panel panel-default trip-details" id="{{@index}}">
             <div class="panel-body">
                 Trip details
             </div>

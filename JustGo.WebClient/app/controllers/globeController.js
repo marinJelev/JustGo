@@ -59,7 +59,8 @@ $wrapper.on('click', '#spin', function () {
     if (spinning) {
         globe.spin();
     } else {
-        persister.getAllCountry()
+        persister
+            .getAllCountry()
             .then(function (data) {
                 var position = setMarkerOnRandomPosition(data);
 
@@ -96,7 +97,6 @@ $wrapper.on('click', '.save-place', function () {
     persister
         .savePlace(place)
         .then(function (data) {
-            console.log(data);
         });
 });
 
@@ -117,11 +117,9 @@ $wrapper.on('click', '#save-trip', function () {
             to: trip.pop(),
             waypoints: trip
         };
-console.log(data);
     persister
-        .savePlace(data)
+        .saveTrip(data)
         .then(function (data) {
-            console.log(data);
         });
 });
 

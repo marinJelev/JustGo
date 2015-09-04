@@ -14,15 +14,15 @@ function init() {
 }
 
 function calculateAndDisplayRoute(trip) {
-    var locationFrom = new google.maps.LatLng(trip.locationFrom.lat, trip.locationFrom.long);
-    var locationTo = new google.maps.LatLng(trip.locationTo.lat, trip.locationTo.long);
+    var locationFrom = new google.maps.LatLng(trip.from.latitude, trip.from.longitude);
+    var locationTo = new google.maps.LatLng(trip.to.latitude, trip.to.longitude);
     var directionPanel = document.getElementById('directions-panel');
-    var wayPoints = trip.locationsThrough.map(function(wayPoint){
+    var wayPoints = trip.waypoints.map(function(wayPoint){
 
         return {
             location: {
-                lat: parseFloat(wayPoint.lat),
-                lng: parseFloat(wayPoint.long)
+                lat: parseFloat(wayPoint.latitude),
+                lng: parseFloat(wayPoint.longitude)
             }
         };
     });

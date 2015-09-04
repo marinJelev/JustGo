@@ -1,9 +1,9 @@
 function get(url, data, json, token) {
-    return request('GET',  url, data,json, token);
+    return request('GET', url, data, json, token);
 }
 
 function post(url, data, json, token) {
-    return request('POST', url, data,json, token);
+    return request('POST', url, data, json, token);
 }
 
 function request(type, url, data, json, token) {
@@ -11,8 +11,8 @@ function request(type, url, data, json, token) {
         $.ajax({
             url: url,
             method: type,
-            beforeSend: function (xhr) {
-                customHeaders(xhr, json, token)
+            beforeSend: function(xhr) {
+                customHeaders(xhr, json, token);
             },
             data: JSON.stringify(data),
             success: function(data) {
@@ -27,18 +27,19 @@ function request(type, url, data, json, token) {
     return promise;
 }
 
-function customHeaders(xhr, json, token){
+function customHeaders(xhr, json, token) {
     var headers = {};
-    if(json){
+    if (json) {
         xhr.setRequestHeader('Content-Type', 'application/json');
     }
 
-    if(token){
+    if (token) {
         xhr.setRequestHeader('X-Access-Token', token);
     }
 
-    return headers
+    return headers;
 }
 
-
-export default { get, post };
+export default {
+    get, post
+};

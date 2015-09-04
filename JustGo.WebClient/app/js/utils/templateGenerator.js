@@ -1,5 +1,5 @@
-import Handlebars from '../../bower_components/handlebars/handlebars.js';
-import httpRequester from 'utils/http-requester.js';
+import Handlebars from '../../../bower_components/handlebars/handlebars.js';
+import httpRequester from './http-requester.js';
 
 var instance = null;
 
@@ -22,14 +22,14 @@ class TemplateGenerator {
     }
 
     compile(url) {
-        var promise = new Promise(function (resolve, reject) {
+        var promise = new Promise(function(resolve, reject) {
             httpRequester
                 .get(url, false, false)
-                .then(function (data) {
+                .then(function(data) {
                     var template = Handlebars.compile(data);
                     return template;
                 })
-                .then(function (data) {
+                .then(function(data) {
                     resolve(data);
                 });
         });
@@ -46,4 +46,6 @@ function get(url) {
     return instance.get(url);
 }
 
-export default { get };
+export default {
+    get
+};

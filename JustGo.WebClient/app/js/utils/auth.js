@@ -1,5 +1,5 @@
 import httpRequester from '../utils/http-requester.js';
-import identity from './identity.js';
+import identity from '../utils/identity.js';
 
 var LOGIN_URL = 'http://localhost:3030/login';
 var LOGOUT_URL = 'http://localhost:3030/logout';
@@ -32,19 +32,19 @@ function login(user) {
 }
 
 function logout() {
-    var token =  identity.getToken();
-    var promise = new Promise(function(resolve, reject) {
-        httpRequester
-            .post(LOGOUT_URL, true, token)
-            .then(function(data) {
-                identity.setCurrentUser('');
-                identity.setToken('');
-                resolve();
-            })
-            .catch(function(err) {
-                reject(err);
-            });
-    });
+    var token = identity.getToken(),
+        promise = new Promise(function(resolve, reject) {
+            httpRequester
+                .post(LOGOUT_URL, false, false, token)
+                .then(function(data) {
+                    identity.setCurrentUser('');
+                    identity.setToken('');
+                    resolve();
+                })
+                .catch(function(err) {
+                    reject(err);
+                });
+        });
 
     return promise;
 }

@@ -7,7 +7,10 @@ function init() {
     directionsService = new google.maps.DirectionsService;
     map = new google.maps.Map(document.getElementById('map'), {
         zoom: 14,
-        center: {lat: 42.6954322, lng: 23.3239467}
+        center: {
+            lat: 42.6954322,
+            lng: 23.3239467
+        }
     });
 
     directionsDisplay.setMap(map);
@@ -17,7 +20,7 @@ function calculateAndDisplayRoute(trip) {
     var locationFrom = new google.maps.LatLng(trip.from.latitude, trip.from.longitude);
     var locationTo = new google.maps.LatLng(trip.to.latitude, trip.to.longitude);
     var directionPanel = document.getElementById('directions-panel');
-    var wayPoints = trip.waypoints.map(function(wayPoint){
+    var wayPoints = trip.waypoints.map(function(wayPoint) {
 
         return {
             location: {
@@ -35,7 +38,7 @@ function calculateAndDisplayRoute(trip) {
         destination: locationTo,
         waypoints: wayPoints,
         travelMode: google.maps.TravelMode['DRIVING']
-    }, function (response, status) {
+    }, function(response, status) {
         if (status == google.maps.DirectionsStatus.OK) {
             directionsDisplay.setDirections(response);
         } else {
@@ -44,4 +47,6 @@ function calculateAndDisplayRoute(trip) {
     });
 }
 
-export default {init, calculateAndDisplayRoute}
+export default {
+    init, calculateAndDisplayRoute
+}

@@ -1,7 +1,9 @@
-import globe from 'utils/globe.js';
+import globe from '../utils/globe.js';
 import notifier from '../utils/notifier.js';
-import persister from '../services/persister.js';
-import templateGenerator from 'utils/templateGenerator.js';
+import templateGenerator from '../utils/templateGenerator.js';
+import persister from '../data/persister.js';
+import placesData from '../data/places.js';
+import tripsData from '../data/trips.js';
 
 var PLACE_SUCCESSFULLY_SAVED_MESSAGE = 'Place successfully saved!',
     URL = {
@@ -39,7 +41,7 @@ function init() {
     });
 
     //google maps Search input
-    searchBox.addListener('places_changed', function () {
+    searchBox.addListener('places_changed', function() {
         var places = searchBox.getPlaces();
 
         if (places.length === 0) {
@@ -99,8 +101,8 @@ function bindEvents() {
 
         var place = places[index];
 
-        persister
-            .savePlace(place)
+        placesData
+            .create(place)
             .then(function(data) {
                 notifier.alertSuccess(PLACE_SUCCESSFULLY_SAVED_MESSAGE);
             })
@@ -132,8 +134,8 @@ function bindEvents() {
             data.waypoints = waypoints;
         }
 
-        persister
-            .saveTrip(data)
+        tripsData
+            .create(data)
             .then(function(data) {});
     });
 
@@ -155,6 +157,12 @@ function setMarkerOnRandomPosition(data) {
 }
 
 function addPlace(place) {
+    for (var i = 0; i < places.length; i += 1) {
+        if (places[i].latitude === place.latitude && places[i].longitude === place.longitude) {
+            return;
+        }
+    }
+
     places.push(place);
 
     var templateObject = {
@@ -199,13 +207,18 @@ function addMarker(lat, long) {
             templateGenerator
                 .get(URL.POPUP)
                 .then(function(template) {
-                    marker.bindPopup(template(place), {maxWidth: 150, closeButton: true}).openPopup();
+                    marker.bindPopup(template(place), {
+                        maxWidth: 150,
+                        closeButton: true
+                    }).openPopup();
                 });
         });
 
-    setTimeout(function () {
+    setTimeout(function() {
         $('.we-pp-close').removeAttr('href');
     }, 500);
 }
 
-export default { init };
+export default {
+    init
+};

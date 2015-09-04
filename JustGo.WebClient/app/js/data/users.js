@@ -6,8 +6,12 @@ function create(user) {
     var promise = new Promise(function(resolve, reject) {
         httpRequester
             .post(USERS_URL, user, true)
-            .then(function(user) {
-                resolve(user);
+            .then(function(data) {
+                if (!data.success) {
+                    reject(data.reason);
+                }
+
+                resolve(data.user);
             })
             .catch(function(err) {
                 reject(err);

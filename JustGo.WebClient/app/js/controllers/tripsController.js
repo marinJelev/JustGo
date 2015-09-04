@@ -1,7 +1,7 @@
-import persister from '../services/persister.js';
-import Handlebars from '../../bower_components/handlebars/handlebars.js';
-import templateGenerator from 'utils/templateGenerator.js';
-import map from 'utils/map.js';
+import templateGenerator from '../utils/templateGenerator.js';
+import map from '../utils/map.js';
+import identity from '../utils/identity.js';
+import tripsData from '../data/trips.js';
 
 var TRIPS_TEMPLATE = 'app/views/trips.html';
 var $templateTarget = $('#main-content');
@@ -10,19 +10,24 @@ var $tripsContainer;
 var $directionPanel;
 
 function init() {
+    if (!identity.getCurrentUser()) {
+        routie('/home');
+        return;
+    }
+
     $('#main-content').load('app/views/tripsView.html', bindEvents);
 }
 
 function bindEvents() {
     $tripsContainer = $('#trips-container');
-    persister
-        .getTrips()
-        .then(function (data) {
+    tripsData
+        .getAll()
+        .then(function(data) {
             trips = data.trips;
 
             templateGenerator
                 .get(TRIPS_TEMPLATE)
-                .then(function (template) {
+                .then(function(template) {
                     $tripsContainer.html(template(trips));
                 });
 
@@ -33,7 +38,7 @@ function bindEvents() {
     $directionPanel.hide();
 }
 
-$templateTarget.on('click', '#trips-view button', function (ev) {
+$templateTarget.on('click', '#trips-view button', function(ev) {
     var index = ev.target.id.split('-')[1];
     var divId = '#' + index;
     var $tripDetails = $(divId);
@@ -45,4 +50,6 @@ $templateTarget.on('click', '#trips-view button', function (ev) {
     map.calculateAndDisplayRoute(trips[index])
 });
 
-export default {init};
+export default {
+    init
+};

@@ -1,8 +1,8 @@
-import identity from '../services/identity.js';
+import crypto from '../../../node_modules/crypto-js/crypto-js.js';
+import identity from '../utils/identity.js';
 import notifier from '../utils/notifier.js';
+import template from '../utils/templateGenerator.js';
 import users from '../data/users.js';
-//import template from '../utils/templateGenerator.js';
-import crypto from '../../node_modules/crypto-js/crypto-js.js';
 
 var USERNAME_MIN_VALID_LENGTH = 3,
     PASSWORD_MIN_VALID_LENGTH = 5,
@@ -19,19 +19,14 @@ function init() {
         return;
     }
 
-    // Breaks unit test due to handlebars
-    // import template is DISABLED
-    //
-    //    .get(TEMPLATE_URL)
-    //    .then(function(template) {
-    //        $('#main-content').html(template());
-    //    })
-    //    .then(function() {
-    //        bindEvents();
-    //    });
-
-    // Use old instead
-    $('#main-content').load('app/views/registerView.html', bindEvents);
+    template
+        .get(TEMPLATE_URL)
+        .then(function(template) {
+            $('#main-content').html(template());
+        })
+        .then(function() {
+            bindEvents();
+        });
 }
 
 function bindEvents(argument) {
@@ -39,7 +34,7 @@ function bindEvents(argument) {
         $resetButton = $('#reset-button'),
         $submitButton = $('#submit-button');
 
-    $resetButton.on('click', function () {
+    $resetButton.on('click', function() {
         $registrationForm.trigger('reset');
     });
 
@@ -73,13 +68,11 @@ function handleRegistrationLogic() {
 
     users
         .create(currentUser)
-        .then(function (user) {
-            console.log('SUCCESS');
+        .then(function(user) {
             notifier.alertSuccess(REGISTRATION_SUCCESS_MESSAGE);
             routie('/login');
         })
-        .catch(function (err) {
-            console.log('ERROR');
+        .catch(function(err) {
             notifier.alertError(err);
         });
 }
@@ -96,4 +89,6 @@ function arePasswordsEqual(password, retypedPassword) {
     return password === retypedPassword;
 }
 
-export default { init };
+export default {
+    init
+};

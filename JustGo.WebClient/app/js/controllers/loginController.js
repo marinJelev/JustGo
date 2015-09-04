@@ -1,8 +1,8 @@
-import identity from '../services/identity.js';
+import crypto from '../../../node_modules/crypto-js/crypto-js.js';
+import identity from '../utils/identity.js';
 import notifier from '../utils/notifier.js';
-import auth from '../services/auth.js';
+import auth from '../utils/auth.js';
 import template from '../utils/templateGenerator.js';
-import crypto from '../../node_modules/crypto-js/crypto-js.js';
 
 var USERNAME_MIN_VALID_LENGTH = 3,
     PASSWORD_MIN_VALID_LENGTH = 5,
@@ -79,4 +79,6 @@ function isValidPassword(password) {
     return password.length >= PASSWORD_MIN_VALID_LENGTH;
 }
 
-export default { init };
+export default {
+    init
+};

@@ -1,4 +1,4 @@
-import identity from '../services/identity.js';
+import identity from '../utils/identity.js';
 
 function init() {
     var currentUser = identity.getCurrentUser();
@@ -18,7 +18,7 @@ function init() {
 function bindEvents() {
     var $carouselItem = $('.carousel .item');
 
-        $carouselItem.each(function () {
+    $carouselItem.each(function() {
         var next = $(this).next();
         if (!next.length) {
             next = $(this).siblings(':first');
@@ -33,17 +33,17 @@ function bindEvents() {
             next.children(':first-child').clone().appendTo($(this));
         }
     });
-    $(".home-buttons").hover(function () {
+    $(".home-buttons").hover(function() {
         $(this).css("background-color", " #375a7f");
         $(this).css("transform", "scale(1.5)");
-    }, function () {
+    }, function() {
         $(this).css("background-color", "");
         $(this).css("transform", "scale(1)");
     });
 }
 
-function usernameToProperCase(username){
-    return username.charAt(0).toUpperCase() + username.substr(1).toLowerCase()
+function usernameToProperCase(username) {
+    return username.charAt(0).toUpperCase() + username.substr(1).toLowerCase();
 }
 
 export default {

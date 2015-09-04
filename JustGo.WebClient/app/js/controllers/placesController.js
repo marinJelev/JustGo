@@ -1,20 +1,25 @@
-import persister from '../services/persister.js';
-import templateGenerator from 'utils/templateGenerator.js';
-import map from 'utils/map.js';
+import templateGenerator from '../utils/templateGenerator.js';
+import map from '../utils/map.js';
+import identity from '../utils/identity.js';
+import placesData from '../data/places.js';
 
 var PLACES_VIEW = 'app/views/placesView.html';
 var $TEMPLATE_TARGET = $('#main-content');
 var places;
 
 function init() {
+    if (!identity.getCurrentUser()) {
+        routie('/home');
+        return;
+    }
 
-    persister
-        .getPlaces()
-        .then(function (data) {
+    placesData
+        .getAll()
+        .then(function(data) {
             places = data.places;
             templateGenerator
                 .get(PLACES_VIEW)
-                .then(function (template) {
+                .then(function(template) {
                     $TEMPLATE_TARGET.html(template(places));
                 });
         })
@@ -39,21 +44,18 @@ function visualizeMap(placeId) {
 
     map = new google.maps.Map(document.getElementById(placeId), myOptions);
 
-    var marker = new google.maps.Marker({
-        position: location,
-        map: map
-    });
-
-    google.maps.event.addListenerOnce(map, 'idle', function () {
+    google.maps.event.addListenerOnce(map, 'idle', function() {
         google.maps.event.trigger(map, 'resize');
         map.setCenter(location);
     });
 }
 
-$TEMPLATE_TARGET.on('click', '#places-view a', function (ev) {
+$TEMPLATE_TARGET.on('click', '#places-view a', function(ev) {
     var id = ev.target.id.split('-')[1];
     $('#' + id).toggle();
     visualizeMap(id);
 });
 
-export default {init}
+export default {
+    init
+}

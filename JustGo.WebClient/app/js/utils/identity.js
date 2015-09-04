@@ -6,11 +6,11 @@ function setCurrentUser(username) {
     localStorage.setItem('currentUser', username);
 }
 
-function getToken(){
+function getToken() {
     return localStorage.getItem('token')
 }
 
-function setToken(token){
+function setToken(token) {
     localStorage.setItem('token', token);
 }
 

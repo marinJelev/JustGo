@@ -4,7 +4,7 @@ var before = null;
 var map;
 
 function init() {
-     map = WE.map('map', {
+    map = WE.map('map', {
         center: [36.057944835, -112.18688965],
         zoom: 2,
         atmosphere: true,

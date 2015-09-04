@@ -120,11 +120,18 @@ function bindEvents() {
 
     $wrapper.on('click', '#save-trip', function() {
         var trip = places.slice(),
+            from = trip.shift(),
+            to = trip.pop(),
+            waypoints = trip,
             data = {
-                from: trip.shift(),
-                to: trip.pop(),
-                waypoints: trip
+                from: from,
+                to: to
             };
+
+        if (waypoints.length > 0) {
+            data.waypoints = waypoints;
+        }
+
         persister
             .saveTrip(data)
             .then(function(data) {});

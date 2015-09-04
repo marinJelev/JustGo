@@ -44,6 +44,11 @@ function visualizeMap(placeId) {
 
     map = new google.maps.Map(document.getElementById(placeId), myOptions);
 
+    var marker = new google.maps.Marker({
+        position: location,
+        map: map
+    });
+
     google.maps.event.addListenerOnce(map, 'idle', function() {
         google.maps.event.trigger(map, 'resize');
         map.setCenter(location);

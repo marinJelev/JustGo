@@ -1,7 +1,7 @@
 import chai from 'chai';
 import jq from 'jquery';
 import jsdom from '../node_modules/jsdom/lib/jsdom.js';
-import registerController from '../app/controllers/registerController.js';
+import registerController from '../app/js/controllers/registerController.js';
 
 var expect = chai.expect;
 

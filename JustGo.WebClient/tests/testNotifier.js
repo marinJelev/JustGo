@@ -1,6 +1,6 @@
 import chai from 'chai';
 import jq from 'jquery';
-import notifier from '../app/utils/notifier.js';
+import notifier from '../app/js/utils/notifier.js';
 import jsdom from '../node_modules/jsdom/lib/jsdom.js';
 
 var expect = chai.expect;

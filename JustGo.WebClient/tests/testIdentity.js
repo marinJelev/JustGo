@@ -1,7 +1,7 @@
 import chai from 'chai';
 import jq from 'jquery';
 import jsdom from '../node_modules/jsdom/lib/jsdom.js';
-import identity from '../app/services/identity.js';
+import identity from '../app/js/utils/identity.js';
 
 var expect = chai.expect;
 

@@ -1,7 +1,7 @@
 import crypto from '../../../node_modules/crypto-js/crypto-js.js';
 import identity from '../utils/identity.js';
 import notifier from '../utils/notifier.js';
-import template from '../utils/templateGenerator.js';
+//import template from '../utils/templateGenerator.js';
 import users from '../data/users.js';
 
 var USERNAME_MIN_VALID_LENGTH = 3,
@@ -18,15 +18,19 @@ function init() {
         routie('/home');
         return;
     }
+    // Breaks unit test due to handlebars
+    // import template is DISABLED
+    //
+    //    .get(TEMPLATE_URL)
+    //    .then(function(template) {
+    //        $('#main-content').html(template());
+    //    })
+    //    .then(function() {
+    //        bindEvents();
+    //    });
 
-    template
-        .get(TEMPLATE_URL)
-        .then(function(template) {
-            $('#main-content').html(template());
-        })
-        .then(function() {
-            bindEvents();
-        });
+    // Use old instead
+    $('#main-content').load('app/views/registerView.html', bindEvents);
 }
 
 function bindEvents(argument) {

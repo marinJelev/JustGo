@@ -1,5 +1,5 @@
 import Handlebars from '../../bower_components/handlebars/handlebars.js';
-import httpRequester from 'utils/http-requester.js'
+import httpRequester from 'utils/http-requester.js';
 
 var instance = null;
 
@@ -18,7 +18,7 @@ class TemplateGenerator {
             this.lazy[url] = this.compile(url);
         }
 
-        return this.lazy[url]
+        return this.lazy[url];
     }
 
     compile(url) {
@@ -27,7 +27,7 @@ class TemplateGenerator {
                 .get(url, false, false)
                 .then(function (data) {
                     var template = Handlebars.compile(data);
-                    return template
+                    return template;
                 })
                 .then(function (data) {
                     resolve(data);
@@ -46,6 +46,4 @@ function get(url) {
     return instance.get(url);
 }
 
-export default {get}
-
-
+export default { get };

@@ -1,11 +1,13 @@
 import globe from 'utils/globe.js';
+import notifier from '../utils/notifier.js';
 import persister from '../services/persister.js';
 import templateGenerator from 'utils/templateGenerator.js';
 
-var URL = {
-    POPUP: 'app/views/globePopUp.html',
-    PLACE: 'app/views/globePlace.html'
-};
+var PLACE_SUCCESSFULLY_SAVED_MESSAGE = 'Place successfully saved!',
+    URL = {
+        POPUP: 'app/views/globePopUp.html',
+        PLACE: 'app/views/globePlace.html'
+    };
 
 var marker,
     map,
@@ -28,7 +30,7 @@ function init() {
     map = globe.init();
     $tripContainer.hide();
 
-    map.on('click', function (e) {
+    map.on('click', function(e) {
         if (!e.latlng) {
             return;
         }
@@ -40,95 +42,100 @@ function init() {
     searchBox.addListener('places_changed', function () {
         var places = searchBox.getPlaces();
 
-        if (places.length == 0) {
+        if (places.length === 0) {
             return;
         }
 
-        places.forEach(function (place) {
+        places.forEach(function(place) {
             var lat = place.geometry.location.G;
             var long = place.geometry.location.K;
 
             globe.panTo([lat, long]);
-            addMarker(lat, long)
+            addMarker(lat, long);
         });
     });
+
+    bindEvents();
 }
 
-$wrapper.on('click', '#spin', function () {
-    spinning = !spinning;
-    if (spinning) {
-        globe.spin();
-    } else {
+function bindEvents() {
+    $wrapper.on('click', '#spin', function() {
+        spinning = !spinning;
+        if (spinning) {
+            globe.spin();
+        } else {
+            persister
+                .getAllCountry()
+                .then(function(data) {
+                    var position = setMarkerOnRandomPosition(data);
+
+                    globe.spin();
+
+                    setTimeout(function() {
+                        globe.panTo(position);
+                    }, 50);
+                });
+        }
+    });
+
+    $wrapper.on('click', '#random', function() {
         persister
             .getAllCountry()
-            .then(function (data) {
+            .then(function(data) {
                 var position = setMarkerOnRandomPosition(data);
 
-                globe.spin();
-
-                setTimeout(function () {
-                    globe.panTo(position);
-                }, 50)
+                globe.panTo(position);
             });
-    }
-});
+    });
 
-$wrapper.on('click', '#random', function () {
-    persister
-        .getAllCountry()
-        .then(function (data) {
-            var position = setMarkerOnRandomPosition(data);
+    $wrapper.on('click', '#add-place', function() {
+        addPlace(place);
+    });
 
-            globe.panTo(position);
-        });
-});
+    $wrapper.on('click', '.save-place', function() {
+        var $this = $(this);
+        var $parentLi = $this.closest('li');
+        var index = $parentLi.attr('data-id') - 1;
 
-$wrapper.on('click', '#add-place', function () {
-    addPlace(place);
-});
+        var place = places[index];
 
-$wrapper.on('click', '.save-place', function () {
-    var $this = $(this);
-    var $parentLi = $this.closest('li');
-    var index = $parentLi.attr('data-id') - 1;
+        persister
+            .savePlace(place)
+            .then(function(data) {
+                notifier.alertSuccess(PLACE_SUCCESSFULLY_SAVED_MESSAGE);
+            })
+            .catch(function(err) {
+                notifier.alertError(err);
+            });
+    });
 
-    var place = places[index];
+    $wrapper.on('click', '.remove-place', function() {
+        var $this = $(this);
+        var $parentLi = $this.closest('li');
+        var index = $parentLi.attr('data-id') - 1;
 
-    persister
-        .savePlace(place)
-        .then(function (data) {
-        });
-});
+        $placeContainer.remove($parentLi);
+        place.space(index, 1);
+    });
 
+    $wrapper.on('click', '#save-trip', function() {
+        var trip = places.slice(),
+            data = {
+                from: trip.shift(),
+                to: trip.pop(),
+                waypoints: trip
+            };
+        persister
+            .saveTrip(data)
+            .then(function(data) {});
+    });
 
-$wrapper.on('click', '.remove-place', function () {
-    var $this = $(this);
-    var $parentLi = $this.closest('li');
-    var index = $parentLi.attr('data-id') - 1;
-
-    $placeContainer.remove($parentLi);
-    place.space(index, 1);
-});
-
-$wrapper.on('click', '#save-trip', function () {
-    var trip = places.slice(),
-        data = {
-            from: trip.shift(),
-            to: trip.pop(),
-            waypoints: trip
-        };
-    persister
-        .saveTrip(data)
-        .then(function (data) {
-        });
-});
-
-$wrapper.on('click', '#remove-all', function () {
-    places = [];
-    $placeContainer.html('');
-    $tripContainer.hide();
-
-});
+    $wrapper.on('click', '#remove-all', function() {
+        places = [];
+        $placeContainer.html('');
+        $tripContainer.hide();
+    });
+}
 
 function setMarkerOnRandomPosition(data) {
     var randomCountry = data[Math.random() * 250 | 0];
@@ -152,7 +159,7 @@ function addPlace(place) {
 
     templateGenerator
         .get(URL.PLACE)
-        .then(function (template) {
+        .then(function(template) {
             $placeContainer.append(template(templateObject));
         });
 
@@ -171,7 +178,7 @@ function addMarker(lat, long) {
     marker = WE.marker([lat, long]).addTo(map);
     persister
         .getCityByGeoLocation(lat, long)
-        .then(function (data) {
+        .then(function(data) {
             countryData = data.results;
             var countryDataLastIndex = countryData.length - 1;
             place = {
@@ -184,16 +191,14 @@ function addMarker(lat, long) {
 
             templateGenerator
                 .get(URL.POPUP)
-                .then(function (template) {
+                .then(function(template) {
                     marker.bindPopup(template(place), {maxWidth: 150, closeButton: true}).openPopup();
                 });
         });
 
     setTimeout(function () {
         $('.we-pp-close').removeAttr('href');
-    }, 500)
-
+    }, 500);
 }
 
-export default {init};
-
+export default { init };

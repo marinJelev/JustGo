@@ -1,13 +1,15 @@
 import identity from '../services/identity.js';
 import notifier from '../utils/notifier.js';
 import auth from '../services/auth.js';
-import CryptoJS from '../../node_modules/crypto-js/crypto-js.js';
+import template from '../utils/templateGenerator.js';
+import crypto from '../../node_modules/crypto-js/crypto-js.js';
 
 var USERNAME_MIN_VALID_LENGTH = 3,
     PASSWORD_MIN_VALID_LENGTH = 5,
     LOGIN_SUCCESS_MESSAGE = 'Success - You are logged in!',
     INVALID_USERNAME_MESSAGE = 'Username should be minimum ' + USERNAME_MIN_VALID_LENGTH + ' letters long',
-    INVALID_PASSWORD_MESSAGE = 'Password should be minimum ' + PASSWORD_MIN_VALID_LENGTH + ' letters long';
+    INVALID_PASSWORD_MESSAGE = 'Password should be minimum ' + PASSWORD_MIN_VALID_LENGTH + ' letters long',
+    TEMPLATE_URL = 'app/views/loginView.html';
 
 function init() {
     if (identity.getCurrentUser()) {
@@ -15,7 +17,14 @@ function init() {
         return;
     }
 
-    $('#main-content').load('app/views/loginView.html', bindEvents);
+    template
+        .get(TEMPLATE_URL)
+        .then(function(template) {
+            $('#main-content').html(template());
+        })
+        .then(function() {
+            bindEvents();
+        });
 }
 
 function bindEvents() {
@@ -36,7 +45,7 @@ function handleUserLogin() {
         currentUser = {},
         username = $inputUsername.val(),
         password = $inputPassword.val(),
-        encryptedPassword = CryptoJS.SHA256(password).toString();
+        encryptedPassword = crypto.SHA256(password).toString();
 
     if (!isValidUsername(username)) {
         notifier.alertError(INVALID_USERNAME_MESSAGE);
@@ -70,6 +79,4 @@ function isValidPassword(password) {
     return password.length >= PASSWORD_MIN_VALID_LENGTH;
 }
 
-export default {
-    init
-};
+export default { init };

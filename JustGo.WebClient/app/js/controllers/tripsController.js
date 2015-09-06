@@ -3,11 +3,14 @@ import map from '../utils/map.js';
 import identity from '../utils/identity.js';
 import tripsData from '../data/trips.js';
 
-var TRIPS_TEMPLATE = 'app/views/trips.html';
-var $templateTarget = $('#main-content');
-var trips = [];
-var $tripsContainer;
-var $directionPanel;
+var URL = {
+    TRIPS_TEMPLATE: 'app/views/trips.html',
+    TRIPS_VIEW: 'app/views/tripsView.html'
+};
+var $tripsContainer,
+    $directionPanel,
+    trips = [],
+    $mainContent = $('#main-content');
 
 function init() {
     if (!identity.getCurrentUser()) {
@@ -15,30 +18,38 @@ function init() {
         return;
     }
 
-    $('#main-content').load('app/views/tripsView.html', bindEvents);
+    templateGenerator
+        .get(URL.TRIPS_VIEW)
+        .then(function (template) {
+            $mainContent.html(template());
+        })
+        .then(function () {
+            return tripsData
+                .getAll()
+        })
+        .then(function (data) {
+            trips = data.trips;
+        })
+        .then(function () {
+            return templateGenerator
+                .get(URL.TRIPS_TEMPLATE)
+        })
+        .then(function (template) {
+            $tripsContainer = $('#trips-container');
+            $tripsContainer.html(template(trips));
+        })
+        .then(function () {
+            bindEvents();
+        });
 }
 
 function bindEvents() {
-    $tripsContainer = $('#trips-container');
-    tripsData
-        .getAll()
-        .then(function(data) {
-            trips = data.trips;
-
-            templateGenerator
-                .get(TRIPS_TEMPLATE)
-                .then(function(template) {
-                    $tripsContainer.html(template(trips));
-                });
-
-        });
-
     map.init();
     $directionPanel = $('#directions-panel');
     $directionPanel.hide();
 }
 
-$templateTarget.on('click', '#trips-view button', function(ev) {
+$mainContent.on('click', '#trips-view button', function (ev) {
     var index = ev.target.id.split('-')[1];
     var divId = '#' + index;
     var $tripDetails = $(divId);

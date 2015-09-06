@@ -8,7 +8,6 @@ If you want to sketch a trip or just daydream of the places on your wish list â€
 
 | <a href="http://tinypic.com?ref=2zsoa4z" target="_blank"><img src="http://i60.tinypic.com/2zsoa4z.jpg" width="50" height="50"></a> Pavel_Dobranov  | <a href="http://tinypic.com?ref=25qg30p"><img src="http://i57.tinypic.com/25qg30p.jpg" width="50" height="50"></a> tomasaa              | <a href="http://tinypic.com?ref=x4ghed" target="_blank"><img src="http://i62.tinypic.com/x4ghed.jpg" width="50" height="50"></a>ykomitov  | <a href="http://tinypic.com?ref=2zyaf61" target="_blank"><img src="http://i58.tinypic.com/2zyaf61.jpg" width="50" height="50"></a>marinJelev         | <a href="http://tinypic.com?ref=2lw14qv" target="_blank"><img src="http://i60.tinypic.com/2lw14qv.jpg" width="50" height="50"></a>Alex_H           |
 :---: | :---: | :---: | :---: | :---:
-| Project Manager | Asst Project Manager | Senior QA | Frontend Developer | Technical Writer |
 
 For the non-registered users, it features a stunning slider collection of the most popular trips and sights as well as quick-links to the user navigation:
 

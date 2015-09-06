@@ -6,33 +6,50 @@ import placesData from '../data/places.js';
 import tripsData from '../data/trips.js';
 
 var PLACE_SUCCESSFULLY_SAVED_MESSAGE = 'Place successfully saved!',
+    CANNOT_FIND_PLACE_INFO = 'Try again,  there\'s nothing out there',
     URL = {
         POPUP: 'app/views/globePopUp.html',
-        PLACE: 'app/views/globePlace.html'
+        PLACE: 'app/views/globePlace.html',
+        GLOBE_VIEW: 'app/views/globeView.html'
     };
 
 var marker,
     map,
-    spinning = false,
-    $wrapper = $('#wrapper'),
     place,
     places,
     trip,
+    input,
+    searchBox,
     $tripContainer,
-    $placeContainer;
+    $placeContainer,
+    $wrapper,
+    $mainContent = $('#main-content'),
+    spinning = false;
 
 function init() {
-    var input = document.getElementById('pac-input'),
-        searchBox = new google.maps.places.SearchBox(input);
+    templateGenerator
+        .get(URL.GLOBE_VIEW)
+        .then(function (template) {
+            $mainContent.html(template());
+        })
+        .then(function () {
+            bindEvents();
+        });
+}
 
+function bindEvents() {
     place = {};
     places = [];
+    map = globe.init();
+    input = document.getElementById('pac-input');
+    searchBox = new google.maps.places.SearchBox(input);
+    $wrapper = $('#globe-view');
     $tripContainer = $('#trip-container');
     $placeContainer = $('#place-container');
-    map = globe.init();
+
     $tripContainer.hide();
 
-    map.on('click', function(e) {
+    map.on('click', function (e) {
         if (!e.latlng) {
             return;
         }
@@ -41,14 +58,14 @@ function init() {
     });
 
     //google maps Search input
-    searchBox.addListener('places_changed', function() {
+    searchBox.addListener('places_changed', function () {
         var places = searchBox.getPlaces();
 
         if (places.length === 0) {
             return;
         }
 
-        places.forEach(function(place) {
+        places.forEach(function (place) {
             var lat = place.geometry.location.G;
             var long = place.geometry.location.K;
 
@@ -57,44 +74,40 @@ function init() {
         });
     });
 
-    bindEvents();
-}
-
-function bindEvents() {
-    $wrapper.on('click', '#spin', function() {
+    $wrapper.on('click', '#spin', function () {
         spinning = !spinning;
         if (spinning) {
             globe.spin();
         } else {
             persister
                 .getAllCountry()
-                .then(function(data) {
+                .then(function (data) {
                     var position = setMarkerOnRandomPosition(data);
 
                     globe.spin();
 
-                    setTimeout(function() {
+                    setTimeout(function () {
                         globe.panTo(position);
                     }, 50);
                 });
         }
     });
 
-    $wrapper.on('click', '#random', function() {
+    $wrapper.on('click', '#random', function () {
         persister
             .getAllCountry()
-            .then(function(data) {
+            .then(function (data) {
                 var position = setMarkerOnRandomPosition(data);
 
                 globe.panTo(position);
             });
     });
 
-    $wrapper.on('click', '#add-place', function() {
+    $wrapper.on('click', '#add-place', function () {
         addPlace(place);
     });
 
-    $wrapper.on('click', '.save-place', function() {
+    $wrapper.on('click', '#save-place', function () {
         var $this = $(this);
         var $parentLi = $this.closest('li');
         var index = $parentLi.attr('data-id') - 1;
@@ -103,15 +116,15 @@ function bindEvents() {
 
         placesData
             .create(place)
-            .then(function(data) {
+            .then(function (data) {
                 notifier.alertSuccess(PLACE_SUCCESSFULLY_SAVED_MESSAGE);
             })
-            .catch(function(err) {
+            .catch(function (err) {
                 notifier.alertError(err);
             });
     });
 
-    $wrapper.on('click', '.remove-place', function() {
+    $wrapper.on('click', '#remove-place', function () {
         var $this = $(this);
         var $parentLi = $this.closest('li');
         var index = $parentLi.attr('data-id') - 1;
@@ -120,7 +133,7 @@ function bindEvents() {
         place.space(index, 1);
     });
 
-    $wrapper.on('click', '#save-trip', function() {
+    $wrapper.on('click', '#save-trip', function () {
         var trip = places.slice(),
             from = trip.shift(),
             to = trip.pop(),
@@ -136,10 +149,11 @@ function bindEvents() {
 
         tripsData
             .create(data)
-            .then(function(data) {});
+            .then(function (data) {
+            });
     });
 
-    $wrapper.on('click', '#remove-all', function() {
+    $wrapper.on('click', '#remove-all', function () {
         places = [];
         $placeContainer.html('');
         $tripContainer.hide();
@@ -174,7 +188,7 @@ function addPlace(place) {
 
     templateGenerator
         .get(URL.PLACE)
-        .then(function(template) {
+        .then(function (template) {
             $placeContainer.append(template(templateObject));
         });
 
@@ -193,7 +207,7 @@ function addMarker(lat, long) {
     marker = WE.marker([lat, long]).addTo(map);
     persister
         .getCityByGeoLocation(lat, long)
-        .then(function(data) {
+        .then(function (data) {
             countryData = data.results;
             var countryDataLastIndex = countryData.length - 1;
             place = {
@@ -203,18 +217,23 @@ function addMarker(lat, long) {
                 latitude: lat,
                 longitude: long
             };
-
-            templateGenerator
+        })
+        .then(function () {
+            return templateGenerator
                 .get(URL.POPUP)
-                .then(function(template) {
-                    marker.bindPopup(template(place), {
-                        maxWidth: 150,
-                        closeButton: true
-                    }).openPopup();
-                });
+        })
+        .then(function (template) {
+            marker.bindPopup(template(place), {
+                maxWidth: 150,
+                closeButton: true
+            }).openPopup();
+        })
+        .catch(function () {
+            notifier.alertError(CANNOT_FIND_PLACE_INFO);
         });
 
-    setTimeout(function() {
+
+    setTimeout(function () {
         $('.we-pp-close').removeAttr('href');
     }, 500);
 }

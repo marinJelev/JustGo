@@ -2,7 +2,7 @@ import httpRequester from '../utils/http-requester.js';
 import identity from '../utils/identity.js';
 
 var GOOGLE_MAPS_URL = "http://maps.googleapis.com/maps/api/geocode/json?latlng=";
-var ALL_COUNTRY_URL = 'app/data/country.json';
+var ALL_COUNTRY_URL = 'app/js/data/country.json';
 var token = identity.getToken();
 
 function getCityByGeoLocation(lat, lang) {
@@ -26,7 +26,6 @@ function getAllCountry() {
         httpRequester
             .get(ALL_COUNTRY_URL, false, true)
             .then(function(data) {
-                console.log(data)
                 resolve(data);
             })
             .catch(function(err) {

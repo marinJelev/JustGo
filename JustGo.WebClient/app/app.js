@@ -17,25 +17,24 @@ routie('/login', loginController.init);
 routie('/places', placesController.init);
 routie('/trips', tripsController.init);
 
-routie('/globe', function() {
+routie('/globe', function () {
     if (!identity.getCurrentUser()) {
         routie('/home');
         return;
     }
-
-    $('#main-content').load('app/views/globeView.html', globeController.init);
+    globeController.init();
 });
 
-routie('*', function() {
+routie('*', function () {
     routie('/home');
 });
 
-$('#logout').on('click', function(ev) {
+$('#logout').on('click', function (ev) {
     ev.preventDefault();
 
     auth
         .logout()
-        .then(function() {
+        .then(function () {
             routie('/home', homeController.init);
         });
 });

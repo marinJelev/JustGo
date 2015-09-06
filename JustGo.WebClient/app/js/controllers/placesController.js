@@ -94,16 +94,16 @@ function visualizeMap(placeId) {
             service.getDetails(requestDetails, function (googlePlace, status) {
                 if (status == google.maps.places.PlacesServiceStatus.OK) {
                     var result = googlePlace;
-                    if (result.photos && result.photos.length > 2) {
+                    if (result.photos && result.photos.length > 1) {
                         for (var j = 0; j < result.photos.length; j += 1) {
                             photo = result.photos[j];
-                            link = photo.getUrl({maxWidth: 400});
+                            link = photo.getUrl({maxWidth: 600});
                             photoLinks.push(link);
                         }
                         showGooglePlacePhotos(place._id, photoLinks);
                     }
                     else {
-                        showStreetViewImages(place.placeId);
+                        showStreetViewImages(place);
                     }
                 }
             });
@@ -115,17 +115,16 @@ $TEMPLATE_TARGET.on('click', '#places-view a', function (ev) {
     var id = ev.target.id.split('-')[1];
     $('#' + id).toggle();
     visualizeMap(id);
-    showStreetViewImages(id);
 });
 
-function showStreetViewImages(id) {
-    var newLatitude = places[id].latitude += 0.003,
-        newLongitude = places[id].longitude += 0.003,
-        imageTwo = $('#img2' + id),
+function showStreetViewImages(place) {
+    var newLatitude = place.latitude += 0.003,
+        newLongitude = place.longitude += 0.003,
+        imageTwo = $('#img2' + place._id),
         newLocation = 'https://maps.googleapis.com/maps/api/streetview?size=350x350&location=' + newLatitude + ',' + newLongitude + '&heading=100&pitch=8&scale=2&key=AIzaSyCP9uz6zrR6jTUMHtHjodwa_a-EQaWcAJ4';
 
     imageTwo.attr('src', newLocation);
-    $('#img1' + id).toggle();
+    $('#img1' + place._id).toggle();
     imageTwo.toggle();
 }
 

@@ -13,6 +13,8 @@
         <div class="col-md-12 list-group-item place-details" id="{{@index}}" style="height: 350px; width: 350px">
             <div id="map-{{@index}}">I am a div</div>
         </div>
+        <img src="https://maps.googleapis.com/maps/api/streetview?size=350x350&location={{this.latitude}},{{this.longitude}}&heading=100&pitch=8&scale=2&key=AIzaSyCP9uz6zrR6jTUMHtHjodwa_a-EQaWcAJ4" id="img1{{@index}}" style="display: none"/>
+        <img src="https://maps.googleapis.com/maps/api/streetview?size=350x350&location={{this.latitude}},{{this.longitude}}&heading=100&pitch=8&scale=2&key=AIzaSyCP9uz6zrR6jTUMHtHjodwa_a-EQaWcAJ4" id="img2{{@index}}" style="display: none"/>
     </div>
     {{/each}}
 </div>

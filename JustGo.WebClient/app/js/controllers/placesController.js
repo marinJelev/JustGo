@@ -22,7 +22,18 @@ function init() {
                 .then(function(template) {
                     $TEMPLATE_TARGET.html(template(places));
                 });
-        })
+        });
+}
+
+function showStreetViewImages(id) {
+    var newLatitude = places[id].latitude += 0.003,
+        newLongitude = places[id].longitude += 0.003,
+        imageTwo = $('#img2' + id),
+        newLocation = 'https://maps.googleapis.com/maps/api/streetview?size=350x350&location=' + newLatitude + ',' + newLongitude + '&heading=100&pitch=8&scale=2&key=AIzaSyCP9uz6zrR6jTUMHtHjodwa_a-EQaWcAJ4';
+
+    imageTwo.attr('src', newLocation);
+    $('#img1' + id).toggle();
+    imageTwo.toggle();
 }
 
 function visualizeMap(placeId) {
@@ -59,6 +70,7 @@ $TEMPLATE_TARGET.on('click', '#places-view a', function(ev) {
     var id = ev.target.id.split('-')[1];
     $('#' + id).toggle();
     visualizeMap(id);
+    showStreetViewImages(id);
 });
 
 export default {

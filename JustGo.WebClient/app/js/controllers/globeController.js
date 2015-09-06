@@ -129,8 +129,12 @@ function bindEvents() {
         var $parentLi = $this.closest('li');
         var index = $parentLi.attr('data-id') - 1;
 
-        $placeContainer.remove($parentLi);
-        place.space(index, 1);
+        $parentLi.remove();
+        places.splice(index, 1);
+
+        if (!places.length) {
+            $tripContainer.hide();
+        }
     });
 
     $wrapper.on('click', '#save-trip', function () {

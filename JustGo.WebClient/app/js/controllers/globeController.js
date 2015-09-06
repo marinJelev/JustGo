@@ -6,6 +6,7 @@ import placesData from '../data/places.js';
 import tripsData from '../data/trips.js';
 
 var PLACE_SUCCESSFULLY_SAVED_MESSAGE = 'Place successfully saved!',
+    TRIP_SUCCESSFULLY_SAVED_MESSAGE= 'Trip successfully saved!',
     CANNOT_FIND_PLACE_INFO = 'Try again,  there\'s nothing out there',
     URL = {
         POPUP: 'app/views/globePopUp.html',
@@ -155,6 +156,10 @@ function bindEvents() {
             .create(data)
             .then(function (data) {
                 $tripContainer.hide();
+                notifier.alertSuccess(TRIP_SUCCESSFULLY_SAVED_MESSAGE);
+            })
+            .catch(function (err) {
+                notifier.alertError(err);
             });
     });
 

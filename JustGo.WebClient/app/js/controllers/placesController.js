@@ -15,11 +15,11 @@ function init() {
 
     placesData
         .getAll()
-        .then(function(data) {
+        .then(function (data) {
             places = data.places;
             templateGenerator
                 .get(PLACES_VIEW)
-                .then(function(template) {
+                .then(function (template) {
                     $TEMPLATE_TARGET.html(template(places));
                 });
         });
@@ -48,8 +48,8 @@ function visualizeMap(placeId) {
     location = new google.maps.LatLng(place.latitude, place.longitude);
 
     myOptions = {
-        zoom: 10,
-        center: location,
+        zoom     : 10,
+        center   : location,
         mapTypeId: google.maps.MapTypeId.ROADMAP
     };
 
@@ -57,21 +57,72 @@ function visualizeMap(placeId) {
 
     var marker = new google.maps.Marker({
         position: location,
-        map: map
+        map     : map
     });
 
-    google.maps.event.addListenerOnce(map, 'idle', function() {
+    google.maps.event.addListenerOnce(map, 'idle', function () {
         google.maps.event.trigger(map, 'resize');
         map.setCenter(location);
     });
+
+    //TextSearch to get the google place_id,then perform getDetails serach to get to Photos array
+    //counter of hours lost to get this to work - 30hrs. Thanks Google...
+
+    var service = new google.maps.places.PlacesService(map);
+    service.textSearch({
+        location: {lat: place.latitude, lng: place.longitude},
+        radius  : 100000,
+        query   : 'hotel'
+    }, callback);
+
+    function callback(results, status) {
+        var requestDetails = {
+                placeId: ''
+            },
+            googlePlaceId,
+            photo,
+            link,
+            photoLinks = [];
+
+        if (status === google.maps.places.PlacesServiceStatus.OK) {
+
+            for (var i = 0; i < results.length; i++) {
+                googlePlaceId = results[i].place_id;
+                requestDetails.placeId = googlePlaceId;
+            }
+            var service = new google.maps.places.PlacesService(map);
+            service.getDetails(requestDetails, function (googlePlace, status) {
+                if (status == google.maps.places.PlacesServiceStatus.OK) {
+                    var result = googlePlace;
+                    if (result.photos) {
+                        for (var j = 0; j < result.photos.length; j += 1) {
+                            photo = result.photos[j];
+                            link = photo.getUrl({maxWidth: 600});
+                            photoLinks.push(link);
+                        }
+                        showGooglePlacePhotos(place._id, photoLinks);
+                    }
+                }
+            });
+        }
+    }
 }
 
-$TEMPLATE_TARGET.on('click', '#places-view a', function(ev) {
+$TEMPLATE_TARGET.on('click', '#places-view a', function (ev) {
     var id = ev.target.id.split('-')[1];
     $('#' + id).toggle();
     visualizeMap(id);
-    showStreetViewImages(id);
 });
+
+function showGooglePlacePhotos(id, photoLinks){
+
+    var imageOne = $('#img3' + id).attr('src', photoLinks[0]);
+    imageOne.toggle();
+
+    var imageTwo = $('#img4' + id).attr('src', photoLinks[1]);
+    imageTwo.toggle();
+
+}
 
 export default {
     init

@@ -154,6 +154,7 @@ function bindEvents() {
         tripsData
             .create(data)
             .then(function (data) {
+                $tripContainer.hide();
             });
     });
 

@@ -94,16 +94,13 @@ function visualizeMap(placeId) {
             service.getDetails(requestDetails, function (googlePlace, status) {
                 if (status == google.maps.places.PlacesServiceStatus.OK) {
                     var result = googlePlace;
-                    if (result.photos && result.photos.length > 1) {
+                    if (result.photos) {
                         for (var j = 0; j < result.photos.length; j += 1) {
                             photo = result.photos[j];
                             link = photo.getUrl({maxWidth: 600});
                             photoLinks.push(link);
                         }
                         showGooglePlacePhotos(place._id, photoLinks);
-                    }
-                    else {
-                        showStreetViewImages(place);
                     }
                 }
             });
@@ -116,17 +113,6 @@ $TEMPLATE_TARGET.on('click', '#places-view a', function (ev) {
     $('#' + id).toggle();
     visualizeMap(id);
 });
-
-function showStreetViewImages(place) {
-    var newLatitude = place.latitude += 0.003,
-        newLongitude = place.longitude += 0.003,
-        imageTwo = $('#img2' + place._id),
-        newLocation = 'https://maps.googleapis.com/maps/api/streetview?size=350x350&location=' + newLatitude + ',' + newLongitude + '&heading=100&pitch=8&scale=2&key=AIzaSyCP9uz6zrR6jTUMHtHjodwa_a-EQaWcAJ4';
-
-    imageTwo.attr('src', newLocation);
-    $('#img1' + place._id).toggle();
-    imageTwo.toggle();
-}
 
 function showGooglePlacePhotos(id, photoLinks){
 
